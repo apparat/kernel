@@ -1,0 +1,25 @@
+<phpunit bootstrap="./phpunit.php">
+    <testsuites>
+        <testsuite>
+            <directory>./src/Kernel/Framework/Test</directory>
+        </testsuite>
+    </testsuites>
+
+    <php>
+        <env name="APPARAT_LOGGER" value="null"/>
+    </php>
+
+    <logging>
+        <!--<log type="coverage-xml" target="build/logs/coverage/xml"/>-->
+    </logging>
+
+    <filter>
+        <whitelist addUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">src</directory>
+            <exclude>
+                <directory suffix=".php">src/Kernel/Framework/Test</directory>
+                <file>src/Kernel/Domain/Contract/SingletonTrait.php</file>
+            </exclude>
+        </whitelist>
+    </filter>
+</phpunit>

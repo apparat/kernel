@@ -1,0 +1,41 @@
+{
+  "name": "apparat/kernel",
+  "description": "Apparat kernel",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Joschi Kuphal",
+      "email": "joschi@kuphal.net"
+    }
+  ],
+  "minimum-stability": "RC",
+  "require": {
+    "php": ">=5.6.0",
+    "vlucas/phpdotenv": "dev-master",
+    "monolog/monolog": "1.x"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^4.8",
+    "satooshi/php-coveralls": "dev-master"
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@github.com:apparat/kernel.git",
+      "reference": "master"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Apparat\\": "src/"
+    },
+    "files": [
+      "src/Kernel/Framework/Bootstrap.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "ApparatTest\\": "src/Kernel/Framework/Test"
+    }
+  }
+}
