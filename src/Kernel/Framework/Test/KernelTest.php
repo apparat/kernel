@@ -4,8 +4,8 @@
  * apparat-kernel
  *
  * @category    Apparat
- * @package     Apparat\Object
- * @subpackage  Apparat\Object\Framework
+ * @package     Apparat\Kernel
+ * @subpackage  Apparat\Kernel\<Layer>
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
@@ -34,13 +34,21 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-$dotenv = new \Dotenv\Dotenv(dirname(dirname(dirname(__DIR__))));
-if (getenv('APP_ENV') === 'development') {
-	$dotenv->load();
+namespace ApparatTest;
+
+/**
+ * Kernel tests
+ *
+ * @package Apparat\Kernel
+ * @subpackage ApparatTest
+ */
+class KernelTest extends AbstractTest
+{
+	/**
+	 * Test the dependency injection container
+	 */
+	public function testDependencyInjectionContainer()
+	{
+
+	}
 }
-
-// Validate the required environment variables
-$dotenv->required('APPARAT_DEPENDENCY_INJECTION')->notEmpty()->allowedValues(['Dice']);
-
-// Bootstrap the kernel
-\Apparat\Kernel\Facade\Kernel::bootstrap();

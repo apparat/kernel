@@ -6,7 +6,7 @@
     </testsuites>
 
     <php>
-        <env name="APPARAT_LOGGER" value="null"/>
+        <env name="APPARAT_DEPENDENCY_INJECTION" value="Dice"/>
     </php>
 
     <logging>

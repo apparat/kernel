@@ -4,8 +4,8 @@
  * apparat-kernel
  *
  * @category    Apparat
- * @package     Apparat\Object
- * @subpackage  Apparat\Object\Framework
+ * @package     Apparat\Kernel
+ * @subpackage  Apparat\Kernel\Framework
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
@@ -34,13 +34,20 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-$dotenv = new \Dotenv\Dotenv(dirname(dirname(dirname(__DIR__))));
-if (getenv('APP_ENV') === 'development') {
-	$dotenv->load();
+namespace Apparat\Kernel\Framework\Di;
+
+/**
+ * Dependency injection invalid argument exception
+ *
+ * @package Apparat\Kernel
+ * @subpackage Apparat\Kernel\Framework
+ */
+class InvalidArgumentException extends \InvalidArgumentException
+{
+	/**
+	 * Unknown dependency injection container type
+	 *
+	 * @var int
+	 */
+	const UNKNOWN_DI_CONTAINER_TYPE = 1453418035;
 }
-
-// Validate the required environment variables
-$dotenv->required('APPARAT_DEPENDENCY_INJECTION')->notEmpty()->allowedValues(['Dice']);
-
-// Bootstrap the kernel
-\Apparat\Kernel\Facade\Kernel::bootstrap();

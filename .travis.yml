@@ -6,7 +6,7 @@ php:
   - hhvm
 
 env:
-- DUMMY=value
+- APPARAT_DEPENDENCY_INJECTION=Dice
 
 matrix:
   allow_failures:
