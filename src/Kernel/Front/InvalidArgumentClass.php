@@ -5,7 +5,7 @@
  *
  * @category    Apparat
  * @package     Apparat\Kernel
- * @subpackage  Apparat\Kernel\<Layer>
+ * @subpackage  Apparat\Kernel\Front
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
@@ -34,20 +34,20 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-namespace ApparatTest;
+namespace Apparat\Kernel\Front;
 
 /**
- * Kernel tests
+ * Kernel front invalid argument exception
  *
  * @package Apparat\Kernel
- * @subpackage ApparatTest
+ * @subpackage Apparat\Kernel\Front
  */
-class KernelTest extends AbstractTest
+class InvalidArgumentClass extends \InvalidArgumentException
 {
 	/**
-	 * Test the dependency injection container
+	 * Invalid module namespace
+	 *
+	 * @var int
 	 */
-	public function testDependencyInjectionContainer()
-	{
-	}
+	const INVALID_MODULE_NAMESPACE = 1453505195;
 }

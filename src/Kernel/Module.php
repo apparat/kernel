@@ -34,20 +34,27 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-namespace ApparatTest;
+namespace Apparat\Kernel;
+
+
+use Apparat\Kernel\Domain\Contract\ModuleInterface;
+use Apparat\Kernel\Framework\DependencyInjection\DiceAdapter;
 
 /**
- * Kernel tests
+ * Kernel module
  *
  * @package Apparat\Kernel
- * @subpackage ApparatTest
+ * @subpackage Apparat\Kernel
  */
-class KernelTest extends AbstractTest
+class Module implements ModuleInterface
 {
 	/**
-	 * Test the dependency injection container
+	 * Configure the Dice dependency injection container
+	 *
+	 * @param DiceAdapter $dice
 	 */
-	public function testDependencyInjectionContainer()
+	public function configureDice(DiceAdapter $dice)
 	{
+		// TODO: Configure Dice
 	}
 }

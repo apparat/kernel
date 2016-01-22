@@ -47,7 +47,15 @@ interface DependencyInjectionContainerInterface
 	/**
 	 * Apply a module's dependency injection configuration
 	 *
-	 * @param string $moduleNamespace Module namespace
+	 * @param ModuleInterface $module Module
 	 */
-	public function configure($moduleNamespace);
+	public function configure(ModuleInterface $module);
+
+	/**
+	 * Create an object instance
+	 *
+	 * @param string $className Object class name
+	 * @param array $args Object constructor arguments
+	 */
+	public function create($name, array $args = []);
 }

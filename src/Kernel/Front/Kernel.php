@@ -37,6 +37,8 @@
 namespace Apparat\Kernel\Front;
 
 use Apparat\Kernel\Domain\Contract\DependencyInjectionContainerInterface;
+use Apparat\Kernel\Domain\Contract\ModuleInterface;
+use Apparat\Kernel\Framework\Di\InvalidArgumentException;
 use Apparat\Kernel\Framework\Factory\DependencyInjectionContainerFactory;
 
 /**
@@ -77,13 +79,36 @@ class Kernel
 	 * Register a kernel module
 	 *
 	 * @param string $moduleNamespace Module namespace
+	 * @throws InvalidArgumentException If the module namespace is invalid
 	 */
 	public static function register($moduleNamespace)
 	{
 		$moduleNamespace = trim($moduleNamespace, '\\');
-		self::$_moduleNamespaces[] = $moduleNamespace;
+		$moduleClass = '\\'.$moduleNamespace.'\\Module';
 
-		self::$_dependencyInjectionContainer->configure($moduleNamespace);
+		// Instantiate the module
+		if (class_exists($moduleClass) && is_subclass_of($moduleClass, ModuleInterface::class)) {
+			$module = new $moduleClass;
+			self::$_moduleNamespaces[$moduleNamespace] = $module;
+
+			// Configure the dependency injection container
+			self::$_dependencyInjectionContainer->configure($module);
+
+			// Else: Error
+		} else {
+			throw new InvalidArgumentException(sprintf('Invalid module namespace "%s"', $moduleNamespace),
+				InvalidArgumentException::UNKNOWN_DI_CONTAINER_TYPE);
+		}
+	}
+
+	/**
+	 * Create an object instance
+	 *
+	 * @param string $className Object class name
+	 * @param array $args Object constructor arguments
+	 */
+	public static function create($name, array $args = []) {
+		return self::$_dependencyInjectionContainer->create($name, $args);
 	}
 
 	/*******************************************************************************

@@ -5,7 +5,7 @@
  *
  * @category    Apparat
  * @package     Apparat\Kernel
- * @subpackage  Apparat\Kernel\<Layer>
+ * @subpackage  Apparat\Kernel\Domain
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
@@ -34,20 +34,15 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-namespace ApparatTest;
+namespace Apparat\Kernel\Domain\Contract;
 
 /**
- * Kernel tests
+ * Kernel module interface
  *
  * @package Apparat\Kernel
- * @subpackage ApparatTest
+ * @subpackage Apparat\Kernel\Domain
  */
-class KernelTest extends AbstractTest
+Interface ModuleInterface
 {
-	/**
-	 * Test the dependency injection container
-	 */
-	public function testDependencyInjectionContainer()
-	{
-	}
+
 }
