@@ -5,7 +5,7 @@
  *
  * @category    Apparat
  * @package     Apparat\Kernel
- * @subpackage  Apparat\Kernel\Framework
+ * @subpackage  Apparat\Kernel\<Layer>
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
@@ -34,32 +34,34 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-namespace Apparat\Kernel\Facade;
+namespace Apparat\Kernel\Framework\Factory;
 
-use Apparat\Kernel\Domain\Contract\DIContainerInterface;
-use Apparat\Kernel\Framework\Factory\DiContainerFactory;
+use Apparat\Kernel\Domain\Contract\DependencyInjectionContainerInterface;
+use Apparat\Kernel\Framework\Di\InvalidArgumentException;
 
 /**
- * Kernel facade
+ * Dependency injection container factory
  *
  * @package Apparat\Kernel
- * @subpackage Apparat\Kernel\Framework
+ * @subpackage Apparat\Kernel\Framewor
  */
-class Kernel
+class DependencyInjectionContainerFactory
 {
 	/**
-	 * Dependency injection container
+	 * Instantiate a dependency injection container
 	 *
-	 * @var DIContainerInterface
+	 * @param string $type Dependency injection container type
+	 * @return DependencyInjectionContainerInterface Dependence injection container adapter
+	 * @throws InvalidArgumentException If the dependency injection container type is unknown
 	 */
-	protected static $_container = null;
-
-	/**
-	 * Bootstrap the kernel
-	 */
-	public static function bootstrap()
+	public static function create($type)
 	{
-		// Instantiate the dependency injection container
-		self::$_container = DiContainerFactory::create(getenv('APPARAT_DEPENDENCY_INJECTION'));
+		$typeClass = '\\Apparat\\Kernel\\Framework\\DependencyInjection\\'.ucfirst(strtolower($type)).'Adapter';
+		if (class_exists($typeClass)) {
+			return new $typeClass;
+		}
+
+		throw new InvalidArgumentException(sprintf('Unknown dependency injection container type "%s"', $type),
+			InvalidArgumentException::UNKNOWN_DI_CONTAINER_TYPE);
 	}
 }

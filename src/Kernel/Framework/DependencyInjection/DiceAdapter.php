@@ -34,9 +34,7 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-namespace Apparat\Kernel\Framework\Di;
-
-use Apparat\Kernel\Domain\Contract\DIContainerInterface;
+namespace Apparat\Kernel\Framework\DependencyInjection;
 
 /**
  * Adapter for the Dice Dependency Injection container
@@ -44,6 +42,15 @@ use Apparat\Kernel\Domain\Contract\DIContainerInterface;
  * @package Apparat\Kernel
  * @subpackage Apparat\Kernel\Framework
  */
-class DiceAdapter implements DIContainerInterface
+class DiceAdapter extends AbstractAdapter
 {
+	/**
+	 * Apply a module's dependency injection configuration
+	 *
+	 * @param string $moduleNamespace Module namespace
+	 */
+	public function configure($moduleNamespace)
+	{
+		// TODO: Implement configure() method.
+	}
 }

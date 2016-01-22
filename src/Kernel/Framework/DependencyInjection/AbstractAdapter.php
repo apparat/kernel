@@ -5,7 +5,7 @@
  *
  * @category    Apparat
  * @package     Apparat\Kernel
- * @subpackage  Apparat\Kernel\Domain
+ * @subpackage  Apparat\Kernel\<Layer>
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
@@ -34,15 +34,18 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-namespace Apparat\Kernel\Domain\Contract;
+namespace Apparat\Kernel\Framework\DependencyInjection;
+
+
+use Apparat\Kernel\Domain\Contract\DependencyInjectionContainerInterface;
 
 /**
- * Dependency Injection container interface
+ * Abstract dependency injection container adapter
  *
  * @package Apparat\Kernel
- * @subpackage Apparat\Kernel\Domain
+ * @subpackage Apparat\Kernel\Framework
  */
-interface DIContainerInterface
+abstract class AbstractAdapter implements DependencyInjectionContainerInterface
 {
 
 }

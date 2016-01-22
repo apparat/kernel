@@ -31,8 +31,8 @@
       "Apparat\\": "src/"
     },
     "files": [
-      "src/Kernel/Facade/Kernel.php",
-      "src/Kernel/Framework/Bootstrap.php"
+      "src/Kernel/Front/Kernel.php",
+      "src/Kernel/Front/Bootstrap.php"
     ]
   },
   "autoload-dev": {
