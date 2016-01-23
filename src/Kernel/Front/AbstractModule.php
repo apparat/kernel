@@ -5,7 +5,7 @@
  *
  * @category    Apparat
  * @package     Apparat\Kernel
- * @subpackage  Apparat\Kernel\<Layer>
+ * @subpackage  Apparat\Kernel\Front
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
@@ -34,18 +34,75 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-namespace Apparat\Kernel\Framework\DependencyInjection;
+namespace Apparat\Kernel\Front;
 
 
 use Apparat\Kernel\Domain\Contract\DependencyInjectionContainerInterface;
+use Apparat\Kernel\Domain\Contract\ModuleInterface;
+use Dotenv\Dotenv;
 
 /**
- * Abstract dependency injection container adapter
+ * Abstract base module
  *
  * @package Apparat\Kernel
- * @subpackage Apparat\Kernel\Framework
+ * @subpackage Apparat\Kernel\Front
  */
-abstract class AbstractAdapter implements DependencyInjectionContainerInterface
+abstract class AbstractModule implements ModuleInterface
 {
+	/**
+	 * Configure the dependency injection container
+	 *
+	 * @param DependencyInjectionContainerInterface $dependencyInjectionContainer Dependency injection container
+	 * @return void
+	 */
+	public function configureDependencyInjection(DependencyInjectionContainerInterface $dependencyInjectionContainer)
+	{
+		// Overwrite in module implementations
+	}
 
+	/**
+	 * Auto-run
+	 *
+	 * @return void
+	 */
+	public static function autorun()
+	{
+		// Validate the environment
+		$reflectionClass = new \ReflectionClass(static::class);
+		static::_validateEnvironment(static::_environment(dirname(dirname(dirname($reflectionClass->getFileName())))));
+
+		// Register the module
+		Kernel::register(new static);
+	}
+
+	/*******************************************************************************
+	 * PRIVATE METHODS
+	 *******************************************************************************/
+
+	/**
+	 * Instantiate the environment
+	 *
+	 * @param string $directory Directory with .env file
+	 * @return Dotenv Environment instance
+	 */
+	protected static function _environment($directory)
+	{
+		// Instantiate the environment abstraction
+		$dotenv = new Dotenv($directory);
+		if (getenv('APP_ENV') === 'development') {
+			$dotenv->load();
+		}
+
+		return $dotenv;
+	}
+
+	/**
+	 * Validate the environment
+	 *
+	 * @param Dotenv $environment Environment
+	 */
+	protected static function _validateEnvironment(Dotenv $environment)
+	{
+		// Overwrite in module implementations
+	}
 }

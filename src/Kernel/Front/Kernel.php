@@ -36,13 +36,11 @@
 
 namespace Apparat\Kernel\Front;
 
-use Apparat\Kernel\Domain\Contract\DependencyInjectionContainerInterface;
 use Apparat\Kernel\Domain\Contract\ModuleInterface;
-use Apparat\Kernel\Framework\Di\InvalidArgumentException;
-use Apparat\Kernel\Framework\Factory\DependencyInjectionContainerFactory;
+use Apparat\Kernel\Framework\DependencyInjection\DiceAdapter;
 
 /**
- * Kernel front
+ * Kernel facade
  *
  * @package Apparat\Kernel
  * @subpackage Apparat\Kernel\Front
@@ -50,55 +48,24 @@ use Apparat\Kernel\Framework\Factory\DependencyInjectionContainerFactory;
 class Kernel
 {
 	/**
-	 * Dependency injection container
+	 * Kernel instance
 	 *
-	 * @var DependencyInjectionContainerInterface
+	 * @var \Apparat\Kernel\Domain\Model\Kernel
 	 */
-	protected static $_dependencyInjectionContainer = null;
-	/**
-	 * Registered module namespaces
-	 *
-	 * @var array
-	 */
-	protected static $_moduleNamespaces = [];
+	protected static $_kernel = null;
 
 	/*******************************************************************************
 	 * PUBLIC METHODS
 	 *******************************************************************************/
 
 	/**
-	 * Bootstrap the kernel
-	 */
-	public static function bootstrap()
-	{
-		// Instantiate the dependency injection container
-		self::$_dependencyInjectionContainer = DependencyInjectionContainerFactory::create(getenv('APP_DIC'));
-	}
-
-	/**
-	 * Register a kernel module
+	 * Register an apparat module
 	 *
-	 * @param string $moduleNamespace Module namespace
-	 * @throws InvalidArgumentException If the module namespace is invalid
+	 * @param ModuleInterface $module Apparat module
 	 */
-	public static function register($moduleNamespace)
+	public static function register(ModuleInterface $module)
 	{
-		$moduleNamespace = trim($moduleNamespace, '\\');
-		$moduleClass = '\\'.$moduleNamespace.'\\Module';
-
-		// Instantiate the module
-		if (class_exists($moduleClass) && is_subclass_of($moduleClass, ModuleInterface::class)) {
-			$module = new $moduleClass;
-			self::$_moduleNamespaces[$moduleNamespace] = $module;
-
-			// Configure the dependency injection container
-			self::$_dependencyInjectionContainer->configure($module);
-
-			// Else: Error
-		} else {
-			throw new InvalidArgumentException(sprintf('Invalid module namespace "%s"', $moduleNamespace),
-				InvalidArgumentException::UNKNOWN_DI_CONTAINER_TYPE);
-		}
+		self::_kernel()->register($module);
 	}
 
 	/**
@@ -106,12 +73,28 @@ class Kernel
 	 *
 	 * @param string $className Object class name
 	 * @param array $args Object constructor arguments
+	 * @return object Object instanceq
 	 */
-	public static function create($name, array $args = []) {
-		return self::$_dependencyInjectionContainer->create($name, $args);
+	public static function create($name, array $args = [])
+	{
+		return self::_kernel()->create($name, $args);
 	}
 
 	/*******************************************************************************
 	 * PRIVATE METHODS
 	 *******************************************************************************/
+
+	/**
+	 * Return the kernel instance
+	 *
+	 * @return \Apparat\Kernel\Domain\Model\Kernel Kernel instance
+	 */
+	protected static function _kernel()
+	{
+		if (self::$_kernel === null) {
+			self::$_kernel = new \Apparat\Kernel\Domain\Model\Kernel(new DiceAdapter());
+		}
+
+		return self::$_kernel;
+	}
 }

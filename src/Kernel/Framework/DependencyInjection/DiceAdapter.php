@@ -36,6 +36,7 @@
 
 namespace Apparat\Kernel\Framework\DependencyInjection;
 
+use Apparat\Kernel\Domain\Contract\DependencyInjectionContainerInterface;
 use Apparat\Kernel\Domain\Contract\ModuleInterface;
 use Dice\Dice;
 
@@ -45,7 +46,7 @@ use Dice\Dice;
  * @package Apparat\Kernel
  * @subpackage Apparat\Kernel\Framework
  */
-class DiceAdapter extends AbstractAdapter
+class DiceAdapter implements DependencyInjectionContainerInterface
 {
 	/**
 	 * Dice instance
@@ -63,17 +64,13 @@ class DiceAdapter extends AbstractAdapter
 	}
 
 	/**
-	 * Apply a module's dependency injection configuration
+	 * Apply a module specific dependency injection configuration
 	 *
 	 * @param ModuleInterface $module Module
 	 */
 	public function configure(ModuleInterface $module)
 	{
-
-		// Call the Dice configuration if possible
-		if (is_callable(array($module, 'configureDice'))) {
-			call_user_func(array($module, 'configureDice'), $this);
-		}
+		$module->configureDependencyInjection($this);
 	}
 
 	/**
@@ -81,6 +78,7 @@ class DiceAdapter extends AbstractAdapter
 	 *
 	 * @param string $className Object class name
 	 * @param array $args Object constructor arguments
+	 * @return object Object instance
 	 */
 	public function create($name, array $args = [])
 	{

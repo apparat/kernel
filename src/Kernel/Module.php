@@ -36,9 +36,9 @@
 
 namespace Apparat\Kernel;
 
-
-use Apparat\Kernel\Domain\Contract\ModuleInterface;
-use Apparat\Kernel\Framework\DependencyInjection\DiceAdapter;
+use Apparat\Kernel\Domain\Contract\DependencyInjectionContainerInterface;
+use Apparat\Kernel\Front\AbstractModule;
+use Dotenv\Dotenv;
 
 /**
  * Kernel module
@@ -46,15 +46,38 @@ use Apparat\Kernel\Framework\DependencyInjection\DiceAdapter;
  * @package Apparat\Kernel
  * @subpackage Apparat\Kernel
  */
-class Module implements ModuleInterface
+class Module extends AbstractModule
 {
+	/*******************************************************************************
+	 * PUBLIC METHODS
+	 *******************************************************************************/
+
 	/**
-	 * Configure the Dice dependency injection container
+	 * Configure the dependency injection container
 	 *
-	 * @param DiceAdapter $dice
+	 * @param DependencyInjectionContainerInterface $dependencyInjectionContainer Dependency injection container
+	 * @return void
 	 */
-	public function configureDice(DiceAdapter $dice)
+	public function configureDependencyInjection(DependencyInjectionContainerInterface $dependencyInjectionContainer)
 	{
-		// TODO: Configure Dice
+		// TODO: Implement
+	}
+
+
+	/*******************************************************************************
+	 * PRIVATE METHODS
+	 *******************************************************************************/
+
+	/**
+	 * Validate the environment
+	 *
+	 * @param Dotenv $environment Environment
+	 */
+	protected static function _validateEnvironment(Dotenv $environment)
+	{
+//		$environment->required('APP_DIC')->notEmpty()->allowedValues(['Dice']);
 	}
 }
+
+// Module auto-run
+Module::autorun();

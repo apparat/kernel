@@ -44,5 +44,18 @@ namespace Apparat\Kernel\Domain\Contract;
  */
 Interface ModuleInterface
 {
+	/**
+	 * Configure the dependency injection container
+	 *
+	 * @param DependencyInjectionContainerInterface $dependencyInjectionContainer Dependency injection container
+	 * @return void
+	 */
+	public function configureDependencyInjection(DependencyInjectionContainerInterface $dependencyInjectionContainer);
 
+	/**
+	 * Auto-run
+	 *
+	 * @return void
+	 */
+	public static function autorun();
 }

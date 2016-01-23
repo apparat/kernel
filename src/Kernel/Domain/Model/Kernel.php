@@ -5,7 +5,7 @@
  *
  * @category    Apparat
  * @package     Apparat\Kernel
- * @subpackage  Apparat\Kernel\<Layer>
+ * @subpackage  Apparat\Kernel\Domain
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
@@ -34,34 +34,54 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-namespace Apparat\Kernel\Framework\Factory;
+namespace Apparat\Kernel\Domain\Model;
+
 
 use Apparat\Kernel\Domain\Contract\DependencyInjectionContainerInterface;
-use Apparat\Kernel\Framework\Di\InvalidArgumentException;
+use Apparat\Kernel\Domain\Contract\ModuleInterface;
 
 /**
- * Dependency injection container factory
+ * Kernel
  *
  * @package Apparat\Kernel
- * @subpackage Apparat\Kernel\Framewor
+ * @subpackage Apparat\Kernel\Domain
  */
-class DependencyInjectionContainerFactory
+class Kernel
 {
 	/**
-	 * Instantiate a dependency injection container
-	 *
-	 * @param string $type Dependency injection container type
-	 * @return DependencyInjectionContainerInterface Dependence injection container adapter
-	 * @throws InvalidArgumentException If the dependency injection container type is unknown
+	 * @var DependencyInjectionContainerInterface
 	 */
-	public static function create($type)
-	{
-		$typeClass = '\\Apparat\\Kernel\\Framework\\DependencyInjection\\'.ucfirst(strtolower($type)).'Adapter';
-		if (class_exists($typeClass)) {
-			return new $typeClass;
-		}
+	protected $_dependencyInjectionContainer;
 
-		throw new InvalidArgumentException(sprintf('Unknown dependency injection container type "%s"', $type),
-			InvalidArgumentException::UNKNOWN_DI_CONTAINER_TYPE);
+	/**
+	 * Kernel constructor
+	 *
+	 * @param DependencyInjectionContainerInterface $dependencyInjectionContainer Dependency injection container
+	 */
+	public function __construct(DependencyInjectionContainerInterface $dependencyInjectionContainer)
+	{
+		$this->_dependencyInjectionContainer = $dependencyInjectionContainer;
+	}
+
+	/**
+	 * Register an apparat module
+	 *
+	 * @param ModuleInterface $module Apparat module
+	 */
+	public function register(ModuleInterface $module) {
+
+		// Apply module specific dependency injection configuration
+		$this->_dependencyInjectionContainer->configure($module);
+	}
+
+	/**
+	 * Create an object instance
+	 *
+	 * @param string $className Object class name
+	 * @param array $args Object constructor arguments
+	 * @return object Object instance
+	 */
+	public function create($name, array $args = []) {
+		$this->_dependencyInjectionContainer->create($name, $args);
 	}
 }

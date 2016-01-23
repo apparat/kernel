@@ -45,7 +45,7 @@ namespace Apparat\Kernel\Domain\Contract;
 interface DependencyInjectionContainerInterface
 {
 	/**
-	 * Apply a module's dependency injection configuration
+	 * Apply a module specific dependency injection configuration
 	 *
 	 * @param ModuleInterface $module Module
 	 */
@@ -56,6 +56,7 @@ interface DependencyInjectionContainerInterface
 	 *
 	 * @param string $className Object class name
 	 * @param array $args Object constructor arguments
+	 * @return object Object instance
 	 */
 	public function create($name, array $args = []);
 }
