@@ -58,4 +58,11 @@ Interface ModuleInterface
 	 * @return void
 	 */
 	public static function autorun();
+
+	/**
+	 * Return the module name
+	 *
+	 * @return string Module name
+	 */
+	public static function getName();
 }

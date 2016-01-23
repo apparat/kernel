@@ -5,7 +5,7 @@
  *
  * @category    Apparat
  * @package     Apparat\Kernel
- * @subpackage  Apparat\Kernel\<Layer>
+ * @subpackage  Apparat\Kernel\Front
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
@@ -34,56 +34,66 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-namespace Apparat\Kernel;
+namespace Apparat\Kernel\Front;
 
-use Apparat\Kernel\Domain\Contract\DependencyInjectionContainerInterface;
-use Apparat\Kernel\Front\AbstractModule;
-use Dotenv\Dotenv;
+use Monolog\Handler\ErrorLogHandler;
+use Monolog\Handler\NullHandler;
+use Monolog\Handler\StreamHandler;
+use Monolog\Handler\SyslogHandler;
 
 /**
- * Kernel module
+ * Abstract logger
  *
  * @package Apparat\Kernel
- * @subpackage Apparat\Kernel
+ * @subpackage Apparat\Kernel\Framework
  */
-class Module extends AbstractModule
+abstract class AbstractLogger extends \Monolog\Logger
 {
 	/**
-	 * Module name
+	 * Logger constructor
 	 *
-	 * @var string
+	 * @param string $name The logging channel
+	 * @throws RuntimeException If the log handler is unsupported
 	 */
-	const NAME = 'kernel';
-
-	/*******************************************************************************
-	 * PUBLIC METHODS
-	 *******************************************************************************/
-
-	/**
-	 * Configure the dependency injection container
-	 *
-	 * @param DependencyInjectionContainerInterface $dependencyInjectionContainer Dependency injection container
-	 * @return void
-	 */
-	public function configureDependencyInjection(DependencyInjectionContainerInterface $dependencyInjectionContainer)
+	public function __construct($name)
 	{
-		// TODO: Implement
-	}
+		$handlers = [];
+		list($handler, $config) = array_pad(explode(':', getenv('APP_LOG'), 2), 2, '');
 
-	/*******************************************************************************
-	 * PRIVATE METHODS
-	 *******************************************************************************/
+		// Instantiate the configured logger
+		switch ($handler) {
 
-	/**
-	 * Validate the environment
-	 *
-	 * @param Dotenv $environment Environment
-	 */
-	protected static function _validateEnvironment(Dotenv $environment)
-	{
-		$environment->required('APP_LOG')->notEmpty();
+			// Syslog handler
+			case 'syslog':
+				$arguments = strlen($config) ? explode('|', $config) : [];
+				$handlers[] = new SyslogHandler(...$arguments);
+				break;
+
+			// ErrorLog handler
+			case 'errorlog':
+				$arguments = strlen($config) ? explode('|', $config) : [];
+				$handlers[] = new ErrorLogHandler(...$arguments);
+				break;
+
+			// Stream handler
+			case 'stream':
+				$arguments = strlen($config) ? explode('|', $config) : [];
+				$handlers[] = new StreamHandler(...$arguments);
+				break;
+
+			// Null handler
+			case 'null':
+				$arguments = strlen($config) ? explode('|', $config) : [];
+				$handlers[] = new NullHandler(...$arguments);
+				break;
+
+			// Unsupported handler
+			default:
+				throw new RuntimeException(sprintf('Unsupported log handler "%s"', $handler),
+					RuntimeException::UNSUPPORTED_LOG_HANDLER);
+				break;
+		}
+
+		parent::__construct($name, $handlers);
 	}
 }
-
-// Module auto-run
-Module::autorun();

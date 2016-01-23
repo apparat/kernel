@@ -5,7 +5,7 @@
  *
  * @category    Apparat
  * @package     Apparat\Kernel
- * @subpackage  Apparat\Kernel\<Layer>
+ * @subpackage  Apparat\Kernel\Framework
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
@@ -34,56 +34,24 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-namespace Apparat\Kernel;
+namespace Apparat\Kernel\Framework\Log;
 
-use Apparat\Kernel\Domain\Contract\DependencyInjectionContainerInterface;
-use Apparat\Kernel\Front\AbstractModule;
-use Dotenv\Dotenv;
+use Apparat\Kernel\Front\AbstractLogger;
+use Apparat\Kernel\Module;
 
 /**
- * Kernel module
+ * Kernel logger
  *
  * @package Apparat\Kernel
- * @subpackage Apparat\Kernel
+ * @subpackage Apparat\Kernel\Framework
  */
-class Module extends AbstractModule
+class Logger extends AbstractLogger
 {
 	/**
-	 * Module name
-	 *
-	 * @var string
+	 * Kernel logger constructor
 	 */
-	const NAME = 'kernel';
-
-	/*******************************************************************************
-	 * PUBLIC METHODS
-	 *******************************************************************************/
-
-	/**
-	 * Configure the dependency injection container
-	 *
-	 * @param DependencyInjectionContainerInterface $dependencyInjectionContainer Dependency injection container
-	 * @return void
-	 */
-	public function configureDependencyInjection(DependencyInjectionContainerInterface $dependencyInjectionContainer)
+	public function __construct()
 	{
-		// TODO: Implement
-	}
-
-	/*******************************************************************************
-	 * PRIVATE METHODS
-	 *******************************************************************************/
-
-	/**
-	 * Validate the environment
-	 *
-	 * @param Dotenv $environment Environment
-	 */
-	protected static function _validateEnvironment(Dotenv $environment)
-	{
-		$environment->required('APP_LOG')->notEmpty();
+		parent::__construct(Module::NAME);
 	}
 }
-
-// Module auto-run
-Module::autorun();

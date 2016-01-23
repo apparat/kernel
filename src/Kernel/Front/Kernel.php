@@ -38,6 +38,7 @@ namespace Apparat\Kernel\Front;
 
 use Apparat\Kernel\Domain\Contract\ModuleInterface;
 use Apparat\Kernel\Framework\DependencyInjection\DiceAdapter;
+use Apparat\Kernel\Framework\Log\Logger;
 
 /**
  * Kernel facade
@@ -92,7 +93,7 @@ class Kernel
 	protected static function _kernel()
 	{
 		if (self::$_kernel === null) {
-			self::$_kernel = new \Apparat\Kernel\Domain\Model\Kernel(new DiceAdapter());
+			self::$_kernel = new \Apparat\Kernel\Domain\Model\Kernel(new DiceAdapter(), new Logger());
 		}
 
 		return self::$_kernel;

@@ -36,9 +36,9 @@
 
 namespace Apparat\Kernel\Domain\Model;
 
-
 use Apparat\Kernel\Domain\Contract\DependencyInjectionContainerInterface;
 use Apparat\Kernel\Domain\Contract\ModuleInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  * Kernel
@@ -49,18 +49,30 @@ use Apparat\Kernel\Domain\Contract\ModuleInterface;
 class Kernel
 {
 	/**
+	 * Dependency injection container
+	 *
 	 * @var DependencyInjectionContainerInterface
 	 */
 	protected $_dependencyInjectionContainer;
+	/**
+	 * Logger
+	 *
+	 * @var LoggerInterface
+	 */
+	private $_logger;
 
 	/**
 	 * Kernel constructor
 	 *
 	 * @param DependencyInjectionContainerInterface $dependencyInjectionContainer Dependency injection container
+	 * @param LoggerInterface $logger Logger
 	 */
-	public function __construct(DependencyInjectionContainerInterface $dependencyInjectionContainer)
-	{
+	public function __construct(
+		DependencyInjectionContainerInterface $dependencyInjectionContainer,
+		LoggerInterface $logger
+	) {
 		$this->_dependencyInjectionContainer = $dependencyInjectionContainer;
+		$this->_logger = $logger;
 	}
 
 	/**
@@ -68,8 +80,8 @@ class Kernel
 	 *
 	 * @param ModuleInterface $module Apparat module
 	 */
-	public function register(ModuleInterface $module) {
-
+	public function register(ModuleInterface $module)
+	{
 		// Apply module specific dependency injection configuration
 		$this->_dependencyInjectionContainer->configure($module);
 	}
@@ -81,7 +93,8 @@ class Kernel
 	 * @param array $args Object constructor arguments
 	 * @return object Object instance
 	 */
-	public function create($name, array $args = []) {
+	public function create($name, array $args = [])
+	{
 		$this->_dependencyInjectionContainer->create($name, $args);
 	}
 }

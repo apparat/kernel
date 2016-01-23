@@ -50,6 +50,13 @@ use Dotenv\Dotenv;
 abstract class AbstractModule implements ModuleInterface
 {
 	/**
+	 * Module name
+	 *
+	 * @var string
+	 */
+	const NAME = 'abstract';
+
+	/**
 	 * Configure the dependency injection container
 	 *
 	 * @param DependencyInjectionContainerInterface $dependencyInjectionContainer Dependency injection container
@@ -59,6 +66,20 @@ abstract class AbstractModule implements ModuleInterface
 	{
 		// Overwrite in module implementations
 	}
+
+	/**
+	 * Return the module name
+	 *
+	 * @return string Module name
+	 */
+	public static function getName()
+	{
+		return static::NAME;
+	}
+
+	/*******************************************************************************
+	 * STATIC METHODS
+	 *******************************************************************************/
 
 	/**
 	 * Auto-run

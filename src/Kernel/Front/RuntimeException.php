@@ -5,7 +5,7 @@
  *
  * @category    Apparat
  * @package     Apparat\Kernel
- * @subpackage  Apparat\Kernel\Framework
+ * @subpackage  Apparat\Kernel\Front
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
@@ -34,20 +34,20 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-namespace Apparat\Kernel\Framework\Di;
+namespace Apparat\Kernel\Front;
 
 /**
- * Dependency injection invalid argument exception
+ * Kernel runtime exception
  *
  * @package Apparat\Kernel
- * @subpackage Apparat\Kernel\Framework
+ * @subpackage Apparat\Kernel\Front
  */
-class InvalidArgumentException extends \InvalidArgumentException
+class RuntimeException extends \RuntimeException
 {
 	/**
-	 * Unknown dependency injection container type
+	 * Unsupported log handler
 	 *
 	 * @var int
 	 */
-	const UNKNOWN_DI_CONTAINER_TYPE = 1453418035;
+	const UNSUPPORTED_LOG_HANDLER = 1453587845;
 }
