@@ -5,7 +5,7 @@
  *
  * @category    Apparat
  * @package     Apparat\Kernel
- * @subpackage  Apparat\Kernel\Front
+ * @subpackage  Apparat\Kernel\Infrastructure
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
@@ -34,20 +34,24 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-namespace Apparat\Kernel\Front;
+namespace Apparat\Kernel\Infrastructure\Log;
+
+use Apparat\Kernel\Ports\AbstractLogger;
+use Apparat\Kernel\Module;
 
 /**
- * Kernel runtime exception
+ * Kernel logger
  *
  * @package Apparat\Kernel
- * @subpackage Apparat\Kernel\Front
+ * @subpackage Apparat\Kernel\Infrastructure
  */
-class RuntimeException extends \RuntimeException
+class Logger extends AbstractLogger
 {
 	/**
-	 * Unsupported log handler
-	 *
-	 * @var int
+	 * Kernel logger constructor
 	 */
-	const UNSUPPORTED_LOG_HANDLER = 1453587845;
+	public function __construct()
+	{
+		parent::__construct(Module::NAME);
+	}
 }

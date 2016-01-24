@@ -5,7 +5,7 @@
  *
  * @category    Apparat
  * @package     Apparat\Kernel
- * @subpackage  Apparat\Kernel\Front
+ * @subpackage  Apparat\Kernel\<Layer>
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
@@ -34,66 +34,20 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-namespace Apparat\Kernel\Front;
-
-use Monolog\Handler\ErrorLogHandler;
-use Monolog\Handler\NullHandler;
-use Monolog\Handler\StreamHandler;
-use Monolog\Handler\SyslogHandler;
+namespace ApparatTest;
 
 /**
- * Abstract logger
+ * Kernel tests
  *
  * @package Apparat\Kernel
- * @subpackage Apparat\Kernel\Framework
+ * @subpackage ApparatTest
  */
-abstract class AbstractLogger extends \Monolog\Logger
+class KernelTest extends AbstractTest
 {
 	/**
-	 * Logger constructor
-	 *
-	 * @param string $name The logging channel
-	 * @throws RuntimeException If the log handler is unsupported
+	 * Tests the dependency injection container
 	 */
-	public function __construct($name)
+	public function testDependencyInjectionContainer()
 	{
-		$handlers = [];
-		list($handler, $config) = array_pad(explode(':', getenv('APP_LOG'), 2), 2, '');
-
-		// Instantiate the configured logger
-		switch ($handler) {
-
-			// Syslog handler
-			case 'syslog':
-				$arguments = strlen($config) ? explode('|', $config) : [];
-				$handlers[] = new SyslogHandler(...$arguments);
-				break;
-
-			// ErrorLog handler
-			case 'errorlog':
-				$arguments = strlen($config) ? explode('|', $config) : [];
-				$handlers[] = new ErrorLogHandler(...$arguments);
-				break;
-
-			// Stream handler
-			case 'stream':
-				$arguments = strlen($config) ? explode('|', $config) : [];
-				$handlers[] = new StreamHandler(...$arguments);
-				break;
-
-			// Null handler
-			case 'null':
-				$arguments = strlen($config) ? explode('|', $config) : [];
-				$handlers[] = new NullHandler(...$arguments);
-				break;
-
-			// Unsupported handler
-			default:
-				throw new RuntimeException(sprintf('Unsupported log handler "%s"', $handler),
-					RuntimeException::UNSUPPORTED_LOG_HANDLER);
-				break;
-		}
-
-		parent::__construct($name, $handlers);
 	}
 }

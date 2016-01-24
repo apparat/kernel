@@ -5,7 +5,7 @@
  *
  * @category    Apparat
  * @package     Apparat\Object
- * @subpackage  Apparat\Object\Framework
+ * @subpackage  Apparat\Object\Infrastructure
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
@@ -40,7 +40,7 @@ namespace ApparatTest;
  * Basic tests for generic files
  *
  * @package     Apparat\Object
- * @subpackage  Apparat\Object\Framework
+ * @subpackage  Apparat\Object\Infrastructure
  */
 abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 {
@@ -81,7 +81,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Test if two arrays equal in their keys and values
+	 * Tests if two arrays equal in their keys and values
 	 *
 	 * @param array $expected Expected result
 	 * @param array $actual Actual result
@@ -106,7 +106,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 	protected function _sortArrayForComparison(array $array)
 	{
 
-		// Test if all array keys are numeric
+		// Tests if all array keys are numeric
 		$allNumeric = true;
 		foreach (array_keys($array) as $key) {
 			if (!is_numeric($key)) {

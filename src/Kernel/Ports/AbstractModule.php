@@ -5,7 +5,7 @@
  *
  * @category    Apparat
  * @package     Apparat\Kernel
- * @subpackage  Apparat\Kernel\Front
+ * @subpackage  Apparat\Kernel\Ports
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
@@ -34,7 +34,7 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-namespace Apparat\Kernel\Front;
+namespace Apparat\Kernel\Ports;
 
 
 use Apparat\Kernel\Domain\Contract\DependencyInjectionContainerInterface;
@@ -45,7 +45,7 @@ use Dotenv\Dotenv;
  * Abstract base module
  *
  * @package Apparat\Kernel
- * @subpackage Apparat\Kernel\Front
+ * @subpackage Apparat\Kernel\Ports
  */
 abstract class AbstractModule implements ModuleInterface
 {

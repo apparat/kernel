@@ -5,7 +5,7 @@
  *
  * @category    Apparat
  * @package     Apparat\Kernel
- * @subpackage  Apparat\Kernel\Front
+ * @subpackage  Apparat\Kernel\<Layer>
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
@@ -34,39 +34,43 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-namespace Apparat\Kernel\Front;
+namespace Apparat\Kernel\Infrastructure\DependencyInjection;
 
+use Apparat\Kernel\Domain\Contract\DependencyInjectionContainerInterface;
 use Apparat\Kernel\Domain\Contract\ModuleInterface;
-use Apparat\Kernel\Framework\DependencyInjection\DiceAdapter;
-use Apparat\Kernel\Framework\Log\Logger;
+use Dice\Dice;
 
 /**
- * Kernel facade
+ * Adapter for the Dice Dependency Injection container
  *
  * @package Apparat\Kernel
- * @subpackage Apparat\Kernel\Front
+ * @subpackage Apparat\Kernel\Infrastructure
  */
-class Kernel
+class DiceAdapter implements DependencyInjectionContainerInterface
 {
 	/**
-	 * Kernel instance
+	 * Dice instance
 	 *
-	 * @var \Apparat\Kernel\Domain\Model\Kernel
+	 * @var Dice
 	 */
-	protected static $_kernel = null;
-
-	/*******************************************************************************
-	 * PUBLIC METHODS
-	 *******************************************************************************/
+	protected $_dice = null;
 
 	/**
-	 * Register an apparat module
-	 *
-	 * @param ModuleInterface $module Apparat module
+	 * Dice adapter constructor
 	 */
-	public static function register(ModuleInterface $module)
+	public function __construct()
 	{
-		self::_kernel()->register($module);
+		$this->_dice = new Dice();
+	}
+
+	/**
+	 * Apply a module specific dependency injection configuration
+	 *
+	 * @param ModuleInterface $module Module
+	 */
+	public function configure(ModuleInterface $module)
+	{
+		$module->configureDependencyInjection($this);
 	}
 
 	/**
@@ -74,28 +78,10 @@ class Kernel
 	 *
 	 * @param string $className Object class name
 	 * @param array $args Object constructor arguments
-	 * @return object Object instanceq
+	 * @return object Object instance
 	 */
-	public static function create($name, array $args = [])
+	public function create($name, array $args = [])
 	{
-		return self::_kernel()->create($name, $args);
-	}
-
-	/*******************************************************************************
-	 * PRIVATE METHODS
-	 *******************************************************************************/
-
-	/**
-	 * Return the kernel instance
-	 *
-	 * @return \Apparat\Kernel\Domain\Model\Kernel Kernel instance
-	 */
-	protected static function _kernel()
-	{
-		if (self::$_kernel === null) {
-			self::$_kernel = new \Apparat\Kernel\Domain\Model\Kernel(new DiceAdapter(), new Logger());
-		}
-
-		return self::$_kernel;
+		return $this->_dice->create($name, $args);
 	}
 }

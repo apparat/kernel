@@ -37,7 +37,7 @@
 namespace Apparat\Kernel;
 
 use Apparat\Kernel\Domain\Contract\DependencyInjectionContainerInterface;
-use Apparat\Kernel\Front\AbstractModule;
+use Apparat\Kernel\Ports\AbstractModule;
 use Dotenv\Dotenv;
 
 /**
@@ -68,6 +68,7 @@ class Module extends AbstractModule
 	public function configureDependencyInjection(DependencyInjectionContainerInterface $dependencyInjectionContainer)
 	{
 		// TODO: Implement
+		// @see: https://r.je/dice.html#example3-6
 	}
 
 	/*******************************************************************************

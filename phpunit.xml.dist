@@ -1,12 +1,12 @@
 <phpunit bootstrap="./phpunit.php">
     <testsuites>
         <testsuite>
-            <directory>./src/Kernel/Framework/Test</directory>
+            <directory>./src/Kernel/Tests</directory>
         </testsuite>
     </testsuites>
 
     <php>
-        <env name="APP_DIC" value="Dice"/>
+        <env name="APP_LOG" value="errorlog"/>
     </php>
 
     <logging>
@@ -17,7 +17,7 @@
         <whitelist addUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">src</directory>
             <exclude>
-                <directory suffix=".php">src/Kernel/Framework/Test</directory>
+                <directory suffix=".php">src/Kernel/Tests</directory>
                 <file>src/Kernel/Domain/Contract/SingletonTrait.php</file>
             </exclude>
         </whitelist>

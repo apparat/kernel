@@ -5,7 +5,7 @@
  *
  * @category    Apparat
  * @package     Apparat\Kernel
- * @subpackage  Apparat\Kernel\<Layer>
+ * @subpackage  Apparat\Kernel\Ports
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
@@ -34,20 +34,68 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-namespace ApparatTest;
+namespace Apparat\Kernel\Ports;
+
+use Apparat\Kernel\Domain\Contract\ModuleInterface;
+use Apparat\Kernel\Infrastructure\DependencyInjection\DiceAdapter;
+use Apparat\Kernel\Infrastructure\Log\Logger;
 
 /**
- * Kernel tests
+ * Kernel facade
  *
  * @package Apparat\Kernel
- * @subpackage ApparatTest
+ * @subpackage Apparat\Kernel\Ports
  */
-class KernelTest extends AbstractTest
+class Kernel
 {
 	/**
-	 * Test the dependency injection container
+	 * Kernel instance
+	 *
+	 * @var \Apparat\Kernel\Domain\Model\Kernel
 	 */
-	public function testDependencyInjectionContainer()
+	protected static $_kernel = null;
+
+	/*******************************************************************************
+	 * PUBLIC METHODS
+	 *******************************************************************************/
+
+	/**
+	 * Register an apparat module
+	 *
+	 * @param ModuleInterface $module Apparat module
+	 */
+	public static function register(ModuleInterface $module)
 	{
+		self::_kernel()->register($module);
+	}
+
+	/**
+	 * Create an object instance
+	 *
+	 * @param string $className Object class name
+	 * @param array $args Object constructor arguments
+	 * @return object Object instanceq
+	 */
+	public static function create($name, array $args = [])
+	{
+		return self::_kernel()->create($name, $args);
+	}
+
+	/*******************************************************************************
+	 * PRIVATE METHODS
+	 *******************************************************************************/
+
+	/**
+	 * Return the kernel instance
+	 *
+	 * @return \Apparat\Kernel\Domain\Model\Kernel Kernel instance
+	 */
+	protected static function _kernel()
+	{
+		if (self::$_kernel === null) {
+			self::$_kernel = new \Apparat\Kernel\Domain\Model\Kernel(new DiceAdapter(), new Logger());
+		}
+
+		return self::$_kernel;
 	}
 }
