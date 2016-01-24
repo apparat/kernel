@@ -5,7 +5,7 @@
  *
  * @category    Apparat
  * @package     Apparat\Kernel
- * @subpackage  Apparat\Kernel\<Layer>
+ * @subpackage  Apparat\Kernel\Infrastructure
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
@@ -34,54 +34,24 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-namespace Apparat\Kernel\Infrastructure\DependencyInjection;
+namespace Apparat\Kernel\Infrastructure;
 
-use Apparat\Kernel\Domain\Contract\DependencyInjectionContainerInterface;
-use Apparat\Kernel\Domain\Contract\ModuleInterface;
-use Dice\Dice;
+use Apparat\Kernel\Ports\AbstractLogger;
+use Apparat\Kernel\Module;
 
 /**
- * Adapter for the Dice Dependency Injection container
+ * Kernel logger
  *
  * @package Apparat\Kernel
  * @subpackage Apparat\Kernel\Infrastructure
  */
-class DiceAdapter implements DependencyInjectionContainerInterface
+class Logger extends AbstractLogger
 {
 	/**
-	 * Dice instance
-	 *
-	 * @var Dice
-	 */
-	protected $_dice = null;
-
-	/**
-	 * Dice adapter constructor
+	 * Kernel logger constructor
 	 */
 	public function __construct()
 	{
-		$this->_dice = new Dice();
-	}
-
-	/**
-	 * Apply a module specific dependency injection configuration
-	 *
-	 * @param ModuleInterface $module Module
-	 */
-	public function configure(ModuleInterface $module)
-	{
-		$module->configureDependencyInjection($this);
-	}
-
-	/**
-	 * Create an object instance
-	 *
-	 * @param string $className Object class name
-	 * @param array $args Object constructor arguments
-	 * @return object Object instance
-	 */
-	public function create($name, array $args = [])
-	{
-		return $this->_dice->create($name, $args);
+		parent::__construct(Module::NAME);
 	}
 }

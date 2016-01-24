@@ -36,6 +36,7 @@
 
 namespace Apparat\Kernel\Ports;
 
+use Apparat\Kernel\Common\RuntimeException;
 use Monolog\Handler\ErrorLogHandler;
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;

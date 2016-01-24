@@ -53,16 +53,16 @@ Interface ModuleInterface
 	public function configureDependencyInjection(DependencyInjectionContainerInterface $dependencyInjectionContainer);
 
 	/**
+	 * Return the module name
+	 *
+	 * @return string Module name
+	 */
+	public function getName();
+
+	/**
 	 * Auto-run
 	 *
 	 * @return void
 	 */
 	public static function autorun();
-
-	/**
-	 * Return the module name
-	 *
-	 * @return string Module name
-	 */
-	public static function getName();
 }

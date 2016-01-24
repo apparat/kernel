@@ -56,6 +56,10 @@ abstract class AbstractModule implements ModuleInterface
 	 */
 	const NAME = 'abstract';
 
+	/*******************************************************************************
+	 * PUBLIC METHODS
+	 *******************************************************************************/
+
 	/**
 	 * Configure the dependency injection container
 	 *
@@ -72,14 +76,10 @@ abstract class AbstractModule implements ModuleInterface
 	 *
 	 * @return string Module name
 	 */
-	public static function getName()
+	public function getName()
 	{
 		return static::NAME;
 	}
-
-	/*******************************************************************************
-	 * STATIC METHODS
-	 *******************************************************************************/
 
 	/**
 	 * Auto-run

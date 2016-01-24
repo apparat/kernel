@@ -37,8 +37,8 @@
 namespace Apparat\Kernel\Ports;
 
 use Apparat\Kernel\Domain\Contract\ModuleInterface;
-use Apparat\Kernel\Infrastructure\DependencyInjection\DiceAdapter;
-use Apparat\Kernel\Infrastructure\Log\Logger;
+use Apparat\Kernel\Infrastructure\DiceAdapter;
+use Apparat\Kernel\Infrastructure\Logger;
 
 /**
  * Kernel facade

@@ -5,7 +5,7 @@
  *
  * @category    Apparat
  * @package     Apparat\Kernel
- * @subpackage  Apparat\Kernel\Ports
+ * @subpackage  Apparat\Kernel\<Layer>
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
@@ -34,20 +34,54 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-namespace Apparat\Kernel\Ports;
+namespace Apparat\Kernel\Infrastructure;
+
+use Apparat\Kernel\Domain\Contract\DependencyInjectionContainerInterface;
+use Apparat\Kernel\Domain\Contract\ModuleInterface;
+use Dice\Dice;
 
 /**
- * Kernel runtime exception
+ * Adapter for the Dice Dependency Injection container
  *
  * @package Apparat\Kernel
- * @subpackage Apparat\Kernel\Ports
+ * @subpackage Apparat\Kernel\Infrastructure
  */
-class RuntimeException extends \RuntimeException
+class DiceAdapter implements DependencyInjectionContainerInterface
 {
 	/**
-	 * Unsupported log handler
+	 * Dice instance
 	 *
-	 * @var int
+	 * @var Dice
 	 */
-	const UNSUPPORTED_LOG_HANDLER = 1453587845;
+	protected $_dice = null;
+
+	/**
+	 * Dice adapter constructor
+	 */
+	public function __construct()
+	{
+		$this->_dice = new Dice();
+	}
+
+	/**
+	 * Apply a module specific dependency injection configuration
+	 *
+	 * @param ModuleInterface $module Module
+	 */
+	public function configure(ModuleInterface $module)
+	{
+		$module->configureDependencyInjection($this);
+	}
+
+	/**
+	 * Create an object instance
+	 *
+	 * @param string $className Object class name
+	 * @param array $args Object constructor arguments
+	 * @return object Object instance
+	 */
+	public function create($name, array $args = [])
+	{
+		return $this->_dice->create($name, $args);
+	}
 }
