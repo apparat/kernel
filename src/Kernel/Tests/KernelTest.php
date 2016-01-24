@@ -36,6 +36,9 @@
 
 namespace ApparatTest;
 
+use Apparat\Kernel\Ports\Kernel;
+use Psr\Log\LogLevel;
+
 /**
  * Kernel tests
  *
@@ -49,5 +52,13 @@ class KernelTest extends AbstractTest
 	 */
 	public function testDependencyInjectionContainer()
 	{
+		Kernel::emergency(LogLevel::EMERGENCY);
+		Kernel::alert(LogLevel::ALERT);
+		Kernel::critical(LogLevel::CRITICAL);
+		Kernel::error(LogLevel::ERROR);
+		Kernel::warning(LogLevel::WARNING);
+		Kernel::notice(LogLevel::NOTICE);
+		Kernel::info(LogLevel::INFO);
+		Kernel::debug(LogLevel::DEBUG);
 	}
 }

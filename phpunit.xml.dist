@@ -6,7 +6,7 @@
     </testsuites>
 
     <php>
-        <env name="APP_LOG" value="errorlog"/>
+        <env name="APP_LOG" value="null"/>
     </php>
 
     <logging>

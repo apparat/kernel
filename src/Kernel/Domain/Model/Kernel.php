@@ -59,7 +59,7 @@ class Kernel
 	 *
 	 * @var LoggerInterface
 	 */
-	private $_logger;
+	protected $_logger;
 
 	/**
 	 * Kernel constructor
@@ -96,5 +96,18 @@ class Kernel
 	public function create($name, array $args = [])
 	{
 		$this->_dependencyInjectionContainer->create($name, $args);
+	}
+
+	/**
+	 * Logs with an arbitrary level.
+	 *
+	 * @param mixed $level
+	 * @param string $message
+	 * @param array $context
+	 * @return null
+	 */
+	public function log($level, $message, array $context = array())
+	{
+		$this->_logger->log($level, $message, $context);
 	}
 }
