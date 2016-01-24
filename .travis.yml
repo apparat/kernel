@@ -6,7 +6,7 @@ php:
   - hhvm
 
 env:
-- APP_LOG=errorlog
+- APP_LOG=null
 
 matrix:
   allow_failures:

@@ -5,7 +5,7 @@
  *
  * @category    Apparat
  * @package     Apparat\Kernel
- * @subpackage  Apparat\Kernel\<Layer>
+ * @subpackage  Apparat\Kernel\Tests
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
@@ -36,29 +36,21 @@
 
 namespace ApparatTest;
 
-use Apparat\Kernel\Ports\Kernel;
-use Psr\Log\LogLevel;
+use Apparat\Kernel\Module;
 
 /**
- * Kernel tests
+ * Module tests
  *
  * @package Apparat\Kernel
  * @subpackage ApparatTest
  */
-class KernelTest extends AbstractTest
+class ModuleTest extends AbstractTest
 {
 	/**
-	 * Test the log-levels
+	 * Test the module's auto-run feature
 	 */
-	public function testLogging()
+	public function testModuleAutorun()
 	{
-		Kernel::emergency(LogLevel::EMERGENCY);
-		Kernel::alert(LogLevel::ALERT);
-		Kernel::critical(LogLevel::CRITICAL);
-		Kernel::error(LogLevel::ERROR);
-		Kernel::warning(LogLevel::WARNING);
-		Kernel::notice(LogLevel::NOTICE);
-		Kernel::info(LogLevel::INFO);
-		Kernel::debug(LogLevel::DEBUG);
+		Module::autorun();
 	}
 }
