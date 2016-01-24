@@ -6,7 +6,7 @@ php:
   - hhvm
 
 env:
-- APPARAT_DEPENDENCY_INJECTION=Dice
+- APP_LOG=errorlog
 
 matrix:
   allow_failures:
