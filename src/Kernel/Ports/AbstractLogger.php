@@ -41,6 +41,7 @@ use Monolog\Handler\ErrorLogHandler;
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogHandler;
+use Monolog\Logger;
 
 /**
  * Abstract logger
@@ -48,7 +49,7 @@ use Monolog\Handler\SyslogHandler;
  * @package Apparat\Kernel
  * @subpackage Apparat\Kernel\Infrastructure
  */
-abstract class AbstractLogger extends \Monolog\Logger
+abstract class AbstractLogger extends Logger
 {
 	/**
 	 * Logger constructor

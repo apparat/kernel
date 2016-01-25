@@ -89,7 +89,7 @@ class Kernel
 	/**
 	 * Create an object instance
 	 *
-	 * @param string $className Object class name
+	 * @param string $name Object class name
 	 * @param array $args Object constructor arguments
 	 * @return object Object instance
 	 */
