@@ -25,3 +25,7 @@ script:
 
 after_script:
   - bash -c 'if [ "$TRAVIS_PHP_VERSION" != "hhvm" ]; then php vendor/bin/coveralls -v; fi;'
+
+addons:
+    code_climate:
+        repo_token: 7d3209b11aec477b00c5ab40274fc6d5835f28bb820d61725768a19ff6964b8c
