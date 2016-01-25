@@ -36,8 +36,23 @@
 
 namespace ApparatTest;
 
-use Apparat\Kernel\Ports\Kernel;
+use Apparat\Kernel\Infrastructure\Logger;
+use Apparat\Kernel\Module;
 use Psr\Log\LogLevel;
+
+/**
+ * Extended kernel for testing purposes
+ *
+ * @package Apparat\Kernel
+ * @subpackage ApparatTest
+ */
+class Kernel extends \Apparat\Kernel\Ports\Kernel {
+
+	// Reset the kernel instance
+	public static function reset() {
+		self::$_kernel = null;
+	}
+}
 
 /**
  * Kernel tests
@@ -52,6 +67,10 @@ class KernelTest extends AbstractTest
 	 */
 	public function testLogging()
 	{
+		Kernel::reset();
+
+		Module::autorun();
+
 		Kernel::emergency(LogLevel::EMERGENCY);
 		Kernel::alert(LogLevel::ALERT);
 		Kernel::critical(LogLevel::CRITICAL);
@@ -60,5 +79,8 @@ class KernelTest extends AbstractTest
 		Kernel::notice(LogLevel::NOTICE);
 		Kernel::info(LogLevel::INFO);
 		Kernel::debug(LogLevel::DEBUG);
+		Kernel::log(LogLevel::INFO, LogLevel::INFO);
+
+		$this->assertInstanceOf(Logger::class, Kernel::create(Logger::class));
 	}
 }

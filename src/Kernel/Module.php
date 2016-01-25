@@ -67,6 +67,8 @@ class Module extends AbstractModule
 	 */
 	public function configureDependencyInjection(DependencyInjectionContainerInterface $dependencyInjectionContainer)
 	{
+		parent::configureDependencyInjection($dependencyInjectionContainer);
+
 		// TODO: Implement
 		// @see: https://r.je/dice.html#example3-6
 	}
@@ -82,6 +84,8 @@ class Module extends AbstractModule
 	 */
 	protected static function _validateEnvironment(Dotenv $environment)
 	{
+		parent::_validateEnvironment($environment);
+
 		$environment->required('APP_LOG')->notEmpty();
 	}
 }

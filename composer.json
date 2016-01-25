@@ -36,7 +36,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "ApparatTest\\": "src/Kernel/Framework/Test"
+      "ApparatTest\\": "src/Kernel/Tests"
     }
   }
 }

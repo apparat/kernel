@@ -5,7 +5,7 @@
  *
  * @category    Apparat
  * @package     Apparat\Kernel
- * @subpackage  Apparat\Kernel\Domain
+ * @subpackage  Apparat\Kernel\Tests
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
@@ -34,80 +34,71 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-namespace Apparat\Kernel\Domain\Model;
+namespace ApparatTest;
 
-use Apparat\Kernel\Domain\Contract\DependencyInjectionContainerInterface;
-use Apparat\Kernel\Domain\Contract\ModuleInterface;
-use Psr\Log\LoggerInterface;
+use Apparat\Kernel\Infrastructure\Logger;
+use Apparat\Kernel\Module;
 
 /**
- * Kernel
+ * Logger tests
  *
  * @package Apparat\Kernel
- * @subpackage Apparat\Kernel\Domain
+ * @subpackage ApparatTest
  */
-class Kernel
+class LoggerTest extends AbstractTest
 {
 	/**
-	 * Dependency injection container
-	 *
-	 * @var DependencyInjectionContainerInterface
+	 * Test the syslog logger
 	 */
-	protected $_dependencyInjectionContainer;
-	/**
-	 * Logger
-	 *
-	 * @var LoggerInterface
-	 */
-	protected $_logger;
-
-	/**
-	 * Kernel constructor
-	 *
-	 * @param DependencyInjectionContainerInterface $dependencyInjectionContainer Dependency injection container
-	 * @param LoggerInterface $logger Logger
-	 */
-	public function __construct(
-		DependencyInjectionContainerInterface $dependencyInjectionContainer,
-		LoggerInterface $logger
-	) {
-		$this->_dependencyInjectionContainer = $dependencyInjectionContainer;
-		$this->_logger = $logger;
+	public function testSyslogLogger() {
+		putenv('APP_LOG=syslog:test');
+		$syslogLogger = new Logger('test');
+		$this->assertInstanceOf(Logger::class, $syslogLogger);
+		$this->assertEquals(Module::NAME, $syslogLogger->getName());
 	}
 
 	/**
-	 * Register an apparat module
-	 *
-	 * @param ModuleInterface $module Apparat module
+	 * Test the errorlog logger
 	 */
-	public function register(ModuleInterface $module)
-	{
-		// Apply module specific dependency injection configuration
-		$this->_dependencyInjectionContainer->configure($module);
+	public function testErrorlogLogger() {
+		putenv('APP_LOG=errorlog');
+		$errorlogLogger = new Logger('test');
+		$this->assertInstanceOf(Logger::class, $errorlogLogger);
+		$this->assertEquals(Module::NAME, $errorlogLogger->getName());
 	}
 
 	/**
-	 * Create an object instance
-	 *
-	 * @param string $className Object class name
-	 * @param array $args Object constructor arguments
-	 * @return object Object instance
+	 * Test the stream logger
 	 */
-	public function create($name, array $args = [])
-	{
-		return $this->_dependencyInjectionContainer->create($name, $args);
+	public function testStreamLogger() {
+		$logfile = $this->_createTemporaryFile();
+		$randomLog = md5(microtime(true));
+		putenv('APP_LOG=stream:file://'.$logfile);
+		$streamLogger = new Logger('test');
+		$streamLogger->info($randomLog);
+		$this->assertInstanceOf(Logger::class, $streamLogger);
+		$this->assertEquals(Module::NAME, $streamLogger->getName());
+		$this->assertContains($randomLog, file_get_contents($logfile));
 	}
 
 	/**
-	 * Logs with an arbitrary level.
-	 *
-	 * @param mixed $level
-	 * @param string $message
-	 * @param array $context
-	 * @return null
+	 * Test the null logger
 	 */
-	public function log($level, $message, array $context = array())
-	{
-		$this->_logger->log($level, $message, $context);
+	public function testNullLogger() {
+		putenv('APP_LOG=null');
+		$nullLogger = new Logger('test');
+		$this->assertInstanceOf(Logger::class, $nullLogger);
+		$this->assertEquals(Module::NAME, $nullLogger->getName());
+	}
+
+	/**
+	 * Test invalid logger
+	 *
+	 * @expectedException \Apparat\Kernel\Common\RuntimeException
+	 * @expectedExceptionCode 1453587845
+	 */
+	public function testInvalidLogger() {
+		putenv('APP_LOG=invalid');
+		new Logger('test');
 	}
 }

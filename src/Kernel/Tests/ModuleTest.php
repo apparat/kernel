@@ -52,5 +52,7 @@ class ModuleTest extends AbstractTest
 	public function testModuleAutorun()
 	{
 		Module::autorun();
+
+		$this->assertEquals(Module::NAME, (new Module())->getName());
 	}
 }
