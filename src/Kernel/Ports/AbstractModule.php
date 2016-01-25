@@ -63,10 +63,10 @@ abstract class AbstractModule implements ModuleInterface
 	/**
 	 * Configure the dependency injection container
 	 *
-	 * @param DependencyInjectionContainerInterface $dependencyInjectionContainer Dependency injection container
+	 * @param DependencyInjectionContainerInterface $diContainer Dependency injection container
 	 * @return void
 	 */
-	public function configureDependencyInjection(DependencyInjectionContainerInterface $dependencyInjectionContainer)
+	public function configureDependencyInjection(DependencyInjectionContainerInterface $diContainer)
 	{
 		// Overwrite in module implementations
 	}

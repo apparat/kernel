@@ -64,14 +64,14 @@ class Kernel
 	/**
 	 * Kernel constructor
 	 *
-	 * @param DependencyInjectionContainerInterface $dependencyInjectionContainer Dependency injection container
+	 * @param DependencyInjectionContainerInterface $diContainer Dependency injection container
 	 * @param LoggerInterface $logger Logger
 	 */
 	public function __construct(
-		DependencyInjectionContainerInterface $dependencyInjectionContainer,
+		DependencyInjectionContainerInterface $diContainer,
 		LoggerInterface $logger
 	) {
-		$this->_dependencyInjectionContainer = $dependencyInjectionContainer;
+		$this->_dependencyInjectionContainer = $diContainer;
 		$this->_logger = $logger;
 	}
 
