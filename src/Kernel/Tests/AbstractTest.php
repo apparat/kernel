@@ -57,26 +57,29 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 	protected function tearDown()
 	{
 		foreach ($this->_tmpFiles as $tmpFile) {
-			if (@is_file($tmpFile)) {
-				@unlink($tmpFile);
-			} else {
-				@rmdir($tmpFile);
-			}
+			@is_file($tmpFile) ? @unlink($tmpFile) : @rmdir($tmpFile);
 		}
+	}
+
+	/**
+	 * Prepare and register a temporary file
+	 *
+	 * @return string Temporary file name
+	 */
+	protected function _createTemporaryFile()
+	{
+		return $this->_tmpFiles[] = tempnam(sys_get_temp_dir(), 'apparat_test_');
 	}
 
 	/**
 	 * Prepare and register a temporary file name
 	 *
-	 * @param bool $nameOnly Return the name only (don't create file)
 	 * @return string Temporary file name
 	 */
-	protected function _createTemporaryFile($nameOnly = false)
+	protected function _createTemporaryFileName()
 	{
-		$this->_tmpFiles[] = $tempFileName = tempnam(sys_get_temp_dir(), 'apparat_test_');
-		if ($nameOnly) {
-			@unlink($tempFileName);
-		}
+		$tempFileName = $this->_createTemporaryFile();
+		@unlink($tempFileName);
 		return $tempFileName;
 	}
 
@@ -118,32 +121,30 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 		// If not all keys are numeric: Sort the array by key
 		if (!$allNumeric) {
 			ksort($array, SORT_STRING);
-			$array = $this->_sortArrayRecursive($array);
-
-			// Else sort them by data type and value
-		} else {
-			$array = $this->_sortArrayRecursive($array);
-
-			usort($array, function ($a, $b) {
-				$aType = gettype($a);
-				$bType = gettype($b);
-				if ($aType === $bType) {
-					switch ($aType) {
-						case 'array':
-							return strcmp(implode('', array_keys($a)), implode('', array_keys($b)));
-							break;
-						case 'object':
-							return strcmp(spl_object_hash($a), spl_object_hash($b));
-							break;
-						default:
-							return strcmp(strval($a), strval($b));
-							break;
-					}
-				} else {
-					return strcmp($aType, $bType);
-				}
-			});
+			return $this->_sortArrayRecursive($array);
 		}
+
+		// Sort them by data type and value
+		$array = $this->_sortArrayRecursive($array);
+		usort($array, function ($first, $second) {
+			$aType = gettype($first);
+			$bType = gettype($second);
+			if ($aType === $bType) {
+				switch ($aType) {
+					case 'array':
+						return strcmp(implode('', array_keys($first)), implode('', array_keys($second)));
+						break;
+					case 'object':
+						return strcmp(spl_object_hash($first), spl_object_hash($second));
+						break;
+					default:
+						return strcmp(strval($first), strval($second));
+						break;
+				}
+			}
+
+			return strcmp($aType, $bType);
+		});
 
 		return $array;
 	}

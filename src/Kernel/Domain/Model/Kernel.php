@@ -71,7 +71,7 @@ class Kernel
 		DependencyInjectionContainerInterface $diContainer,
 		LoggerInterface $logger
 	) {
-		$this->_dependencyInjectionContainer = $diContainer;
+		$this->_diContainer = $diContainer;
 		$this->_logger = $logger;
 	}
 
@@ -83,7 +83,7 @@ class Kernel
 	public function register(ModuleInterface $module)
 	{
 		// Apply module specific dependency injection configuration
-		$this->_dependencyInjectionContainer->configure($module);
+		$this->_diContainer->configure($module);
 	}
 
 	/**
@@ -95,7 +95,7 @@ class Kernel
 	 */
 	public function create($name, array $args = [])
 	{
-		return $this->_dependencyInjectionContainer->create($name, $args);
+		return $this->_diContainer->create($name, $args);
 	}
 
 	/**

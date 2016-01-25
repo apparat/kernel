@@ -64,13 +64,11 @@ class Module extends AbstractModule
 	 *
 	 * @param DependencyInjectionContainerInterface $diContainer Dependency injection container
 	 * @return void
+	 * @see https://r.je/dice.html#example3-6
 	 */
 	public function configureDependencyInjection(DependencyInjectionContainerInterface $diContainer)
 	{
 		parent::configureDependencyInjection($diContainer);
-
-		// TODO: Implement
-		// @see: https://r.je/dice.html#example3-6
 	}
 
 	/*******************************************************************************
