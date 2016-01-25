@@ -61,31 +61,28 @@ abstract class AbstractLogger extends Logger
 	{
 		$handlers = [];
 		list($handler, $config) = array_pad(explode(':', getenv('APP_LOG'), 2), 2, '');
+		$arguments = strlen($config) ? explode('|', $config) : [];
 
 		// Instantiate the configured logger
 		switch ($handler) {
 
 			// Syslog handler
 			case 'syslog':
-				$arguments = strlen($config) ? explode('|', $config) : [];
 				$handlers[] = new SyslogHandler(...$arguments);
 				break;
 
 			// ErrorLog handler
 			case 'errorlog':
-				$arguments = strlen($config) ? explode('|', $config) : [];
 				$handlers[] = new ErrorLogHandler(...$arguments);
 				break;
 
 			// Stream handler
 			case 'stream':
-				$arguments = strlen($config) ? explode('|', $config) : [];
 				$handlers[] = new StreamHandler(...$arguments);
 				break;
 
 			// Null handler
 			case 'null':
-				$arguments = strlen($config) ? explode('|', $config) : [];
 				$handlers[] = new NullHandler(...$arguments);
 				break;
 

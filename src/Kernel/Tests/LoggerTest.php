@@ -52,9 +52,7 @@ class LoggerTest extends AbstractTest
 	 */
 	public function testSyslogLogger() {
 		putenv('APP_LOG=syslog:test');
-		$syslogLogger = new Logger('test');
-		$this->assertInstanceOf(Logger::class, $syslogLogger);
-		$this->assertEquals(Module::NAME, $syslogLogger->getName());
+		$this->_testLogger();
 	}
 
 	/**
@@ -62,9 +60,7 @@ class LoggerTest extends AbstractTest
 	 */
 	public function testErrorlogLogger() {
 		putenv('APP_LOG=errorlog');
-		$errorlogLogger = new Logger('test');
-		$this->assertInstanceOf(Logger::class, $errorlogLogger);
-		$this->assertEquals(Module::NAME, $errorlogLogger->getName());
+		$this->_testLogger();
 	}
 
 	/**
@@ -86,9 +82,7 @@ class LoggerTest extends AbstractTest
 	 */
 	public function testNullLogger() {
 		putenv('APP_LOG=null');
-		$nullLogger = new Logger('test');
-		$this->assertInstanceOf(Logger::class, $nullLogger);
-		$this->assertEquals(Module::NAME, $nullLogger->getName());
+		$this->_testLogger();
 	}
 
 	/**
@@ -100,5 +94,18 @@ class LoggerTest extends AbstractTest
 	public function testInvalidLogger() {
 		putenv('APP_LOG=invalid');
 		new Logger('test');
+	}
+
+	/*******************************************************************************
+	 * PRIVATE METHODS
+	 *******************************************************************************/
+
+	/**
+	 * Test the currently configured logger
+	 */
+	protected function _testLogger() {
+		$logger = new Logger('test');
+		$this->assertInstanceOf(Logger::class, $logger);
+		$this->assertEquals(Module::NAME, $logger->getName());
 	}
 }
