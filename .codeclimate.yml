@@ -10,8 +10,10 @@ engines:
     enabled: true
     checks:
       Controversial/CamelCasePropertyName:
+        enabled: true
         allow-underscore: true
       Controversial/CamelCaseMethodName:
+        enabled: true
         allow-underscore: true
       CleanCode/StaticAccess:
         enabled: false
