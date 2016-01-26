@@ -51,4 +51,3 @@ class Kernel extends \Apparat\Kernel\Ports\Kernel
         self::$kernel = null;
     }
 }
-

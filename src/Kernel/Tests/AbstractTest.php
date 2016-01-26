@@ -93,28 +93,29 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
         // Sort them by data type and value
         $array = $this->sortArrayRecursive($array);
         usort(
-            $array, function (
-            $first,
-            $second
-        ) {
-            $aType = gettype($first);
-            $bType = gettype($second);
-            if ($aType === $bType) {
-                switch ($aType) {
-                    case 'array':
-                        return strcmp(implode('', array_keys($first)), implode('', array_keys($second)));
-                        break;
-                    case 'object':
-                        return strcmp(spl_object_hash($first), spl_object_hash($second));
-                        break;
-                    default:
-                        return strcmp(strval($first), strval($second));
-                        break;
+            $array,
+            function (
+                $first,
+                $second
+            ) {
+                $aType = gettype($first);
+                $bType = gettype($second);
+                if ($aType === $bType) {
+                    switch ($aType) {
+                        case 'array':
+                            return strcmp(implode('', array_keys($first)), implode('', array_keys($second)));
+                            break;
+                        case 'object':
+                            return strcmp(spl_object_hash($first), spl_object_hash($second));
+                            break;
+                        default:
+                            return strcmp(strval($first), strval($second));
+                            break;
+                    }
                 }
-            }
 
-            return strcmp($aType, $bType);
-        }
+                return strcmp($aType, $bType);
+            }
         );
 
         return $array;
@@ -191,4 +192,3 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
         return $htmlDom->saveXML();
     }
 }
-
