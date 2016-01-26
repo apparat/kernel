@@ -48,40 +48,40 @@ use Dice\Dice;
  */
 class DiceAdapter implements DependencyInjectionContainerInterface
 {
-	/**
-	 * Dice instance
-	 *
-	 * @var Dice
-	 */
-	protected $_dice = null;
+    /**
+     * Dice instance
+     *
+     * @var Dice
+     */
+    protected $_dice = null;
 
-	/**
-	 * Dice adapter constructor
-	 */
-	public function __construct()
-	{
-		$this->_dice = new Dice();
-	}
+    /**
+     * Dice adapter constructor
+     */
+    public function __construct()
+    {
+        $this->_dice = new Dice();
+    }
 
-	/**
-	 * Apply a module specific dependency injection configuration
-	 *
-	 * @param ModuleInterface $module Module
-	 */
-	public function configure(ModuleInterface $module)
-	{
-		$module->configureDependencyInjection($this);
-	}
+    /**
+     * Apply a module specific dependency injection configuration
+     *
+     * @param ModuleInterface $module Module
+     */
+    public function configure(ModuleInterface $module)
+    {
+        $module->configureDependencyInjection($this);
+    }
 
-	/**
-	 * Create an object instance
-	 *
-	 * @param string $name Object class name
-	 * @param array $args Object constructor arguments
-	 * @return object Object instance
-	 */
-	public function create($name, array $args = [])
-	{
-		return $this->_dice->create($name, $args);
-	}
+    /**
+     * Create an object instance
+     *
+     * @param string $name Object class name
+     * @param array $args Object constructor arguments
+     * @return object Object instance
+     */
+    public function create($name, array $args = [])
+    {
+        return $this->_dice->create($name, $args);
+    }
 }

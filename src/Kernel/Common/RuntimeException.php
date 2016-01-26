@@ -44,10 +44,10 @@ namespace Apparat\Kernel\Common;
  */
 class RuntimeException extends \RuntimeException
 {
-	/**
-	 * Unsupported log handler
-	 *
-	 * @var int
-	 */
-	const UNSUPPORTED_LOG_HANDLER = 1453587845;
+    /**
+     * Unsupported log handler
+     *
+     * @var int
+     */
+    const UNSUPPORTED_LOG_HANDLER = 1453587845;
 }

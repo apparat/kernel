@@ -49,11 +49,11 @@ use Psr\Log\LogLevel;
 class Kernel extends \Apparat\Kernel\Ports\Kernel
 {
 
-	// Reset the kernel instance
-	public static function reset()
-	{
-		self::$_kernel = null;
-	}
+    // Reset the kernel instance
+    public static function reset()
+    {
+        self::$_kernel = null;
+    }
 }
 
 /**
@@ -64,25 +64,25 @@ class Kernel extends \Apparat\Kernel\Ports\Kernel
  */
 class KernelTest extends AbstractTest
 {
-	/**
-	 * Test the log-levels
-	 */
-	public function testLogging()
-	{
-		Kernel::reset();
+    /**
+     * Test the log-levels
+     */
+    public function testLogging()
+    {
+        Kernel::reset();
 
-		Module::autorun();
+        Module::autorun();
 
-		Kernel::emergency(LogLevel::EMERGENCY);
-		Kernel::alert(LogLevel::ALERT);
-		Kernel::critical(LogLevel::CRITICAL);
-		Kernel::error(LogLevel::ERROR);
-		Kernel::warning(LogLevel::WARNING);
-		Kernel::notice(LogLevel::NOTICE);
-		Kernel::info(LogLevel::INFO);
-		Kernel::debug(LogLevel::DEBUG);
-		Kernel::log(LogLevel::INFO, LogLevel::INFO);
+        Kernel::emergency(LogLevel::EMERGENCY);
+        Kernel::alert(LogLevel::ALERT);
+        Kernel::critical(LogLevel::CRITICAL);
+        Kernel::error(LogLevel::ERROR);
+        Kernel::warning(LogLevel::WARNING);
+        Kernel::notice(LogLevel::NOTICE);
+        Kernel::info(LogLevel::INFO);
+        Kernel::debug(LogLevel::DEBUG);
+        Kernel::log(LogLevel::INFO, LogLevel::INFO);
 
-		$this->assertInstanceOf(Logger::class, Kernel::create(Logger::class));
-	}
+        $this->assertInstanceOf(Logger::class, Kernel::create(Logger::class));
+    }
 }

@@ -47,11 +47,11 @@ use Apparat\Kernel\Ports\AbstractLogger;
  */
 class Logger extends AbstractLogger
 {
-	/**
-	 * Kernel logger constructor
-	 */
-	public function __construct()
-	{
-		parent::__construct(Module::NAME);
-	}
+    /**
+     * Kernel logger constructor
+     */
+    public function __construct()
+    {
+        parent::__construct(Module::NAME);
+    }
 }

@@ -5,7 +5,7 @@
  *
  * @category    Apparat
  * @package     Apparat\Kernel
- * @subpackage  Apparat\Kernel\Domain
+ * @subpackage  Apparat\Kernel
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
@@ -34,35 +34,6 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-namespace Apparat\Kernel\Domain\Contract;
+namespace Apparat\Kernel;
 
-/**
- * Kernel module interface
- *
- * @package Apparat\Kernel
- * @subpackage Apparat\Kernel\Domain
- */
-interface ModuleInterface
-{
-    /**
-     * Auto-run
-     *
-     * @return void
-     */
-    public static function autorun();
-
-    /**
-     * Configure the dependency injection container
-     *
-     * @param DependencyInjectionContainerInterface $diContainer Dependency injection container
-     * @return void
-     */
-    public function configureDependencyInjection(DependencyInjectionContainerInterface $diContainer);
-
-    /**
-     * Return the module name
-     *
-     * @return string Module name
-     */
-    public function getName();
-}
+Module::autorun();

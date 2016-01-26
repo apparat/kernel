@@ -49,81 +49,81 @@ use Dotenv\Dotenv;
  */
 abstract class AbstractModule implements ModuleInterface
 {
-	/**
-	 * Module name
-	 *
-	 * @var string
-	 */
-	const NAME = 'abstract';
+    /**
+     * Module name
+     *
+     * @var string
+     */
+    const NAME = 'abstract';
 
-	/*******************************************************************************
-	 * PUBLIC METHODS
-	 *******************************************************************************/
+    /*******************************************************************************
+     * PUBLIC METHODS
+     *******************************************************************************/
 
-	/**
-	 * Configure the dependency injection container
-	 *
-	 * @param DependencyInjectionContainerInterface $diContainer Dependency injection container
-	 * @return void
-	 */
-	public function configureDependencyInjection(DependencyInjectionContainerInterface $diContainer)
-	{
-		// Overwrite in module implementations
-	}
+    /**
+     * Configure the dependency injection container
+     *
+     * @param DependencyInjectionContainerInterface $diContainer Dependency injection container
+     * @return void
+     */
+    public function configureDependencyInjection(DependencyInjectionContainerInterface $diContainer)
+    {
+        // Overwrite in module implementations
+    }
 
-	/**
-	 * Return the module name
-	 *
-	 * @return string Module name
-	 */
-	public function getName()
-	{
-		return static::NAME;
-	}
+    /**
+     * Return the module name
+     *
+     * @return string Module name
+     */
+    public function getName()
+    {
+        return static::NAME;
+    }
 
-	/**
-	 * Auto-run
-	 *
-	 * @return void
-	 */
-	public static function autorun()
-	{
-		// Validate the environment
-		$reflectionClass = new \ReflectionClass(static::class);
-		static::_validateEnvironment(static::_environment(dirname(dirname(dirname($reflectionClass->getFileName())))));
+    /**
+     * Auto-run
+     *
+     * @return void
+     */
+    public static function autorun()
+    {
+        // Validate the environment
+        $reflectionClass = new \ReflectionClass(static::class);
+        static::_validateEnvironment(static::_environment(dirname(dirname(dirname($reflectionClass->getFileName())))));
 
-		// Register the module
-		Kernel::register(new static);
-	}
+        // Register the module
+        Kernel::register(new static);
+    }
 
-	/*******************************************************************************
-	 * PRIVATE METHODS
-	 *******************************************************************************/
+    /*******************************************************************************
+     * PRIVATE METHODS
+     *******************************************************************************/
 
-	/**
-	 * Instantiate the environment
-	 *
-	 * @param string $directory Directory with .env file
-	 * @return Dotenv Environment instance
-	 */
-	protected static function _environment($directory)
-	{
-		// Instantiate the environment abstraction
-		$dotenv = new Dotenv($directory);
-		if (getenv('APP_ENV') === 'development') {
-			$dotenv->load();
-		}
+    /**
+     * Instantiate the environment
+     *
+     * @param string $directory Directory with .env file
+     * @return Dotenv Environment instance
+     */
+    protected static function _environment($directory)
+    {
+        // Instantiate the environment abstraction
+        $dotenv = new Dotenv($directory);
+        if (getenv('APP_ENV') === 'development') {
+            $dotenv->load();
+        }
 
-		return $dotenv;
-	}
+        return $dotenv;
+    }
 
-	/**
-	 * Validate the environment
-	 *
-	 * @param Dotenv $environment Environment
-	 */
-	protected static function _validateEnvironment(Dotenv $environment)
-	{
-		// Overwrite in module implementations
-	}
+    /**
+     * Validate the environment
+     *
+     * @param Dotenv $environment Environment
+     */
+    protected static function _validateEnvironment(Dotenv $environment)
+    {
+        // Overwrite in module implementations
+    }
 }

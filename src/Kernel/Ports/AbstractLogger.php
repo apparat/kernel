@@ -51,48 +51,48 @@ use Monolog\Logger;
  */
 abstract class AbstractLogger extends Logger
 {
-	/**
-	 * Logger constructor
-	 *
-	 * @param string $name The logging channel
-	 * @throws RuntimeException If the log handler is unsupported
-	 */
-	public function __construct($name)
-	{
-		$handlers = [];
-		list($handler, $config) = array_pad(explode(':', getenv('APP_LOG'), 2), 2, '');
-		$arguments = strlen($config) ? explode('|', $config) : [];
+    /**
+     * Logger constructor
+     *
+     * @param string $name The logging channel
+     * @throws RuntimeException If the log handler is unsupported
+     */
+    public function __construct($name)
+    {
+        $handlers = [];
+        list($handler, $config) = array_pad(explode(':', getenv('APP_LOG'), 2), 2, '');
+        $arguments = strlen($config) ? explode('|', $config) : [];
 
-		// Instantiate the configured logger
-		switch ($handler) {
+        // Instantiate the configured logger
+        switch ($handler) {
 
-			// Syslog handler
-			case 'syslog':
-				$handlers[] = new SyslogHandler(...$arguments);
-				break;
+            // Syslog handler
+            case 'syslog':
+                $handlers[] = new SyslogHandler(...$arguments);
+                break;
 
-			// ErrorLog handler
-			case 'errorlog':
-				$handlers[] = new ErrorLogHandler(...$arguments);
-				break;
+            // ErrorLog handler
+            case 'errorlog':
+                $handlers[] = new ErrorLogHandler(...$arguments);
+                break;
 
-			// Stream handler
-			case 'stream':
-				$handlers[] = new StreamHandler(...$arguments);
-				break;
+            // Stream handler
+            case 'stream':
+                $handlers[] = new StreamHandler(...$arguments);
+                break;
 
-			// Null handler
-			case 'null':
-				$handlers[] = new NullHandler(...$arguments);
-				break;
+            // Null handler
+            case 'null':
+                $handlers[] = new NullHandler(...$arguments);
+                break;
 
-			// Unsupported handler
-			default:
-				throw new RuntimeException(sprintf('Unsupported log handler "%s"', $handler),
-					RuntimeException::UNSUPPORTED_LOG_HANDLER);
-				break;
-		}
+            // Unsupported handler
+            default:
+                throw new RuntimeException(sprintf('Unsupported log handler "%s"', $handler),
+                    RuntimeException::UNSUPPORTED_LOG_HANDLER);
+                break;
+        }
 
-		parent::__construct($name, $handlers);
-	}
+        parent::__construct($name, $handlers);
+    }
 }

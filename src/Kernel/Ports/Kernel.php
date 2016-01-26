@@ -49,174 +49,174 @@ use Psr\Log\LogLevel;
  */
 class Kernel
 {
-	/**
-	 * Kernel instance
-	 *
-	 * @var \Apparat\Kernel\Domain\Model\Kernel
-	 */
-	protected static $_kernel = null;
+    /**
+     * Kernel instance
+     *
+     * @var \Apparat\Kernel\Domain\Model\Kernel
+     */
+    protected static $_kernel = null;
 
-	/*******************************************************************************
-	 * PUBLIC METHODS
-	 *******************************************************************************/
+    /*******************************************************************************
+     * PUBLIC METHODS
+     *******************************************************************************/
 
-	/**
-	 * Register an apparat module
-	 *
-	 * @param ModuleInterface $module Apparat module
-	 */
-	public static function register(ModuleInterface $module)
-	{
-		self::_kernel()->register($module);
-	}
+    /**
+     * Register an apparat module
+     *
+     * @param ModuleInterface $module Apparat module
+     */
+    public static function register(ModuleInterface $module)
+    {
+        self::_kernel()->register($module);
+    }
 
-	/**
-	 * Create an object instance
-	 *
-	 * @param string $name Object class name
-	 * @param array $args Object constructor arguments
-	 * @return object Object instance
-	 */
-	public static function create($name, array $args = [])
-	{
-		return self::_kernel()->create($name, $args);
-	}
+    /**
+     * Create an object instance
+     *
+     * @param string $name Object class name
+     * @param array $args Object constructor arguments
+     * @return object Object instance
+     */
+    public static function create($name, array $args = [])
+    {
+        return self::_kernel()->create($name, $args);
+    }
 
-	/**
-	 * System is unusable
-	 *
-	 * @param string $message
-	 * @param array $context
-	 * @return null
-	 */
-	public static function emergency($message, array $context = array())
-	{
-		self::_kernel()->log(LogLevel::EMERGENCY, $message, $context);
-	}
+    /**
+     * System is unusable
+     *
+     * @param string $message
+     * @param array $context
+     * @return null
+     */
+    public static function emergency($message, array $context = array())
+    {
+        self::_kernel()->log(LogLevel::EMERGENCY, $message, $context);
+    }
 
-	/**
-	 * Action must be taken immediately
-	 *
-	 * Example: Entire website down, database unavailable, etc. This should
-	 * trigger the SMS alerts and wake you up.
-	 *
-	 * @param string $message
-	 * @param array $context
-	 * @return null
-	 */
-	public static function alert($message, array $context = array())
-	{
-		self::_kernel()->log(LogLevel::ALERT, $message, $context);
-	}
+    /**
+     * Action must be taken immediately
+     *
+     * Example: Entire website down, database unavailable, etc. This should
+     * trigger the SMS alerts and wake you up.
+     *
+     * @param string $message
+     * @param array $context
+     * @return null
+     */
+    public static function alert($message, array $context = array())
+    {
+        self::_kernel()->log(LogLevel::ALERT, $message, $context);
+    }
 
-	/**
-	 * Critical conditions
-	 *
-	 * Example: Application component unavailable, unexpected exception.
-	 *
-	 * @param string $message
-	 * @param array $context
-	 * @return null
-	 */
-	public static function critical($message, array $context = array())
-	{
-		self::_kernel()->log(LogLevel::CRITICAL, $message, $context);
-	}
+    /**
+     * Critical conditions
+     *
+     * Example: Application component unavailable, unexpected exception.
+     *
+     * @param string $message
+     * @param array $context
+     * @return null
+     */
+    public static function critical($message, array $context = array())
+    {
+        self::_kernel()->log(LogLevel::CRITICAL, $message, $context);
+    }
 
-	/**
-	 * Runtime errors that do not require immediate action but should typically
-	 * be logged and monitored
-	 *
-	 * @param string $message
-	 * @param array $context
-	 * @return null
-	 */
-	public static function error($message, array $context = array())
-	{
-		self::_kernel()->log(LogLevel::ERROR, $message, $context);
-	}
+    /**
+     * Runtime errors that do not require immediate action but should typically
+     * be logged and monitored
+     *
+     * @param string $message
+     * @param array $context
+     * @return null
+     */
+    public static function error($message, array $context = array())
+    {
+        self::_kernel()->log(LogLevel::ERROR, $message, $context);
+    }
 
-	/**
-	 * Exceptional occurrences that are not errors
-	 *
-	 * Example: Use of deprecated APIs, poor use of an API, undesirable things
-	 * that are not necessarily wrong.
-	 *
-	 * @param string $message
-	 * @param array $context
-	 * @return null
-	 */
-	public static function warning($message, array $context = array())
-	{
-		self::_kernel()->log(LogLevel::WARNING, $message, $context);
-	}
+    /**
+     * Exceptional occurrences that are not errors
+     *
+     * Example: Use of deprecated APIs, poor use of an API, undesirable things
+     * that are not necessarily wrong.
+     *
+     * @param string $message
+     * @param array $context
+     * @return null
+     */
+    public static function warning($message, array $context = array())
+    {
+        self::_kernel()->log(LogLevel::WARNING, $message, $context);
+    }
 
-	/**
-	 * Normal but significant events
-	 *
-	 * @param string $message
-	 * @param array $context
-	 * @return null
-	 */
-	public static function notice($message, array $context = array())
-	{
-		self::_kernel()->log(LogLevel::NOTICE, $message, $context);
-	}
+    /**
+     * Normal but significant events
+     *
+     * @param string $message
+     * @param array $context
+     * @return null
+     */
+    public static function notice($message, array $context = array())
+    {
+        self::_kernel()->log(LogLevel::NOTICE, $message, $context);
+    }
 
-	/**
-	 * Interesting events
-	 *
-	 * Example: User logs in, SQL logs.
-	 *
-	 * @param string $message
-	 * @param array $context
-	 * @return null
-	 */
-	public static function info($message, array $context = array())
-	{
-		self::_kernel()->log(LogLevel::INFO, $message, $context);
-	}
+    /**
+     * Interesting events
+     *
+     * Example: User logs in, SQL logs.
+     *
+     * @param string $message
+     * @param array $context
+     * @return null
+     */
+    public static function info($message, array $context = array())
+    {
+        self::_kernel()->log(LogLevel::INFO, $message, $context);
+    }
 
-	/**
-	 * Detailed debug information
-	 *
-	 * @param string $message
-	 * @param array $context
-	 * @return null
-	 */
-	public static function debug($message, array $context = array())
-	{
-		self::_kernel()->log(LogLevel::DEBUG, $message, $context);
-	}
+    /**
+     * Detailed debug information
+     *
+     * @param string $message
+     * @param array $context
+     * @return null
+     */
+    public static function debug($message, array $context = array())
+    {
+        self::_kernel()->log(LogLevel::DEBUG, $message, $context);
+    }
 
-	/**
-	 * Logs with an arbitrary level
-	 *
-	 * @param mixed $level
-	 * @param string $message
-	 * @param array $context
-	 * @return null
-	 */
-	public static function log($level, $message, array $context = array())
-	{
-		self::_kernel()->log($level, $message, $context);
-	}
+    /**
+     * Logs with an arbitrary level
+     *
+     * @param mixed $level
+     * @param string $message
+     * @param array $context
+     * @return null
+     */
+    public static function log($level, $message, array $context = array())
+    {
+        self::_kernel()->log($level, $message, $context);
+    }
 
-	/*******************************************************************************
-	 * PRIVATE METHODS
-	 *******************************************************************************/
+    /*******************************************************************************
+     * PRIVATE METHODS
+     *******************************************************************************/
 
-	/**
-	 * Return the kernel instance
-	 *
-	 * @return \Apparat\Kernel\Domain\Model\Kernel Kernel instance
-	 */
-	protected static function _kernel()
-	{
-		if (self::$_kernel === null) {
-			self::$_kernel = new \Apparat\Kernel\Domain\Model\Kernel(new DiceAdapter(), new Logger());
-		}
+    /**
+     * Return the kernel instance
+     *
+     * @return \Apparat\Kernel\Domain\Model\Kernel Kernel instance
+     */
+    protected static function _kernel()
+    {
+        if (self::$_kernel === null) {
+            self::$_kernel = new \Apparat\Kernel\Domain\Model\Kernel(new DiceAdapter(), new Logger());
+        }
 
-		return self::$_kernel;
-	}
+        return self::$_kernel;
+    }
 }

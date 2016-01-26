@@ -31,7 +31,8 @@
       "Apparat\\": "src/"
     },
     "files": [
-      "src/Kernel/Module.php"
+      "src/Kernel/Module.php",
+      "src/Kernel/Autorun.php"
     ]
   },
   "autoload-dev": {

@@ -47,71 +47,71 @@ use Apparat\Kernel\Module;
  */
 class LoggerTest extends AbstractTest
 {
-	/**
-	 * Test the syslog logger
-	 */
-	public function testSyslogLogger()
-	{
-		putenv('APP_LOG=syslog:test');
-		$this->_testLogger();
-	}
+    /**
+     * Test the syslog logger
+     */
+    public function testSyslogLogger()
+    {
+        putenv('APP_LOG=syslog:test');
+        $this->_testLogger();
+    }
 
-	/**
-	 * Test the errorlog logger
-	 */
-	public function testErrorlogLogger()
-	{
-		putenv('APP_LOG=errorlog');
-		$this->_testLogger();
-	}
+    /**
+     * Test the errorlog logger
+     */
+    public function testErrorlogLogger()
+    {
+        putenv('APP_LOG=errorlog');
+        $this->_testLogger();
+    }
 
-	/**
-	 * Test the stream logger
-	 */
-	public function testStreamLogger()
-	{
-		$logfile = $this->_createTemporaryFile();
-		$randomLog = md5(microtime(true));
-		putenv('APP_LOG=stream:file://'.$logfile);
-		$streamLogger = new Logger('test');
-		$streamLogger->info($randomLog);
-		$this->assertInstanceOf(Logger::class, $streamLogger);
-		$this->assertEquals(Module::NAME, $streamLogger->getName());
-		$this->assertContains($randomLog, file_get_contents($logfile));
-	}
+    /**
+     * Test the stream logger
+     */
+    public function testStreamLogger()
+    {
+        $logfile = $this->_createTemporaryFile();
+        $randomLog = md5(microtime(true));
+        putenv('APP_LOG=stream:file://'.$logfile);
+        $streamLogger = new Logger('test');
+        $streamLogger->info($randomLog);
+        $this->assertInstanceOf(Logger::class, $streamLogger);
+        $this->assertEquals(Module::NAME, $streamLogger->getName());
+        $this->assertContains($randomLog, file_get_contents($logfile));
+    }
 
-	/**
-	 * Test the null logger
-	 */
-	public function testNullLogger()
-	{
-		putenv('APP_LOG=null');
-		$this->_testLogger();
-	}
+    /**
+     * Test the null logger
+     */
+    public function testNullLogger()
+    {
+        putenv('APP_LOG=null');
+        $this->_testLogger();
+    }
 
-	/**
-	 * Test invalid logger
-	 *
-	 * @expectedException \Apparat\Kernel\Common\RuntimeException
-	 * @expectedExceptionCode 1453587845
-	 */
-	public function testInvalidLogger()
-	{
-		putenv('APP_LOG=invalid');
-		new Logger('test');
-	}
+    /**
+     * Test invalid logger
+     *
+     * @expectedException \Apparat\Kernel\Common\RuntimeException
+     * @expectedExceptionCode 1453587845
+     */
+    public function testInvalidLogger()
+    {
+        putenv('APP_LOG=invalid');
+        new Logger('test');
+    }
 
-	/*******************************************************************************
-	 * PRIVATE METHODS
-	 *******************************************************************************/
+    /*******************************************************************************
+     * PRIVATE METHODS
+     *******************************************************************************/
 
-	/**
-	 * Test the currently configured logger
-	 */
-	protected function _testLogger()
-	{
-		$logger = new Logger('test');
-		$this->assertInstanceOf(Logger::class, $logger);
-		$this->assertEquals(Module::NAME, $logger->getName());
-	}
+    /**
+     * Test the currently configured logger
+     */
+    protected function _testLogger()
+    {
+        $logger = new Logger('test');
+        $this->assertInstanceOf(Logger::class, $logger);
+        $this->assertEquals(Module::NAME, $logger->getName());
+    }
 }

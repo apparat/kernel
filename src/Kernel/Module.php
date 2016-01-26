@@ -5,7 +5,7 @@
  *
  * @category    Apparat
  * @package     Apparat\Kernel
- * @subpackage  Apparat\Kernel\<Layer>
+ * @subpackage  Apparat\Kernel
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
@@ -48,45 +48,42 @@ use Dotenv\Dotenv;
  */
 class Module extends AbstractModule
 {
-	/**
-	 * Module name
-	 *
-	 * @var string
-	 */
-	const NAME = 'kernel';
+    /**
+     * Module name
+     *
+     * @var string
+     */
+    const NAME = 'kernel';
 
-	/*******************************************************************************
-	 * PUBLIC METHODS
-	 *******************************************************************************/
+    /*******************************************************************************
+     * PUBLIC METHODS
+     *******************************************************************************/
 
-	/**
-	 * Configure the dependency injection container
-	 *
-	 * @param DependencyInjectionContainerInterface $diContainer Dependency injection container
-	 * @return void
-	 * @see https://r.je/dice.html#example3-6
-	 */
-	public function configureDependencyInjection(DependencyInjectionContainerInterface $diContainer)
-	{
-		parent::configureDependencyInjection($diContainer);
-	}
+    /**
+     * Configure the dependency injection container
+     *
+     * @param DependencyInjectionContainerInterface $diContainer Dependency injection container
+     * @return void
+     * @see https://r.je/dice.html#example3-6
+     */
+    public function configureDependencyInjection(DependencyInjectionContainerInterface $diContainer)
+    {
+        parent::configureDependencyInjection($diContainer);
+    }
 
-	/*******************************************************************************
-	 * PRIVATE METHODS
-	 *******************************************************************************/
+    /*******************************************************************************
+     * PRIVATE METHODS
+     *******************************************************************************/
 
-	/**
-	 * Validate the environment
-	 *
-	 * @param Dotenv $environment Environment
-	 */
-	protected static function _validateEnvironment(Dotenv $environment)
-	{
-		parent::_validateEnvironment($environment);
+    /**
+     * Validate the environment
+     *
+     * @param Dotenv $environment Environment
+     */
+    protected static function _validateEnvironment(Dotenv $environment)
+    {
+        parent::_validateEnvironment($environment);
 
-		$environment->required('APP_LOG')->notEmpty();
-	}
+        $environment->required('APP_LOG')->notEmpty();
+    }
 }
-
-// Module auto-run
-Module::autorun();

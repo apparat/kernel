@@ -46,13 +46,13 @@ use Apparat\Kernel\Module;
  */
 class ModuleTest extends AbstractTest
 {
-	/**
-	 * Test the module's auto-run feature
-	 */
-	public function testModuleAutorun()
-	{
-		Module::autorun();
+    /**
+     * Test the module's auto-run feature
+     */
+    public function testModuleAutorun()
+    {
+        Module::autorun();
 
-		$this->assertEquals(Module::NAME, (new Module())->getName());
-	}
+        $this->assertEquals(Module::NAME, (new Module())->getName());
+    }
 }

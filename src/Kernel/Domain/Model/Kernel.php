@@ -48,66 +48,66 @@ use Psr\Log\LoggerInterface;
  */
 class Kernel
 {
-	/**
-	 * Dependency injection container
-	 *
-	 * @var DependencyInjectionContainerInterface
-	 */
-	protected $_diContainer;
-	/**
-	 * Logger
-	 *
-	 * @var LoggerInterface
-	 */
-	protected $_logger;
+    /**
+     * Dependency injection container
+     *
+     * @var DependencyInjectionContainerInterface
+     */
+    protected $_diContainer;
+    /**
+     * Logger
+     *
+     * @var LoggerInterface
+     */
+    protected $_logger;
 
-	/**
-	 * Kernel constructor
-	 *
-	 * @param DependencyInjectionContainerInterface $diContainer Dependency injection container
-	 * @param LoggerInterface $logger Logger
-	 */
-	public function __construct(
-		DependencyInjectionContainerInterface $diContainer,
-		LoggerInterface $logger
-	) {
-		$this->_diContainer = $diContainer;
-		$this->_logger = $logger;
-	}
+    /**
+     * Kernel constructor
+     *
+     * @param DependencyInjectionContainerInterface $diContainer Dependency injection container
+     * @param LoggerInterface $logger Logger
+     */
+    public function __construct(
+        DependencyInjectionContainerInterface $diContainer,
+        LoggerInterface $logger
+    ) {
+        $this->_diContainer = $diContainer;
+        $this->_logger = $logger;
+    }
 
-	/**
-	 * Register an apparat module
-	 *
-	 * @param ModuleInterface $module Apparat module
-	 */
-	public function register(ModuleInterface $module)
-	{
-		// Apply module specific dependency injection configuration
-		$this->_diContainer->configure($module);
-	}
+    /**
+     * Register an apparat module
+     *
+     * @param ModuleInterface $module Apparat module
+     */
+    public function register(ModuleInterface $module)
+    {
+        // Apply module specific dependency injection configuration
+        $this->_diContainer->configure($module);
+    }
 
-	/**
-	 * Create an object instance
-	 *
-	 * @param string $name Object class name
-	 * @param array $args Object constructor arguments
-	 * @return object Object instance
-	 */
-	public function create($name, array $args = [])
-	{
-		return $this->_diContainer->create($name, $args);
-	}
+    /**
+     * Create an object instance
+     *
+     * @param string $name Object class name
+     * @param array $args Object constructor arguments
+     * @return object Object instance
+     */
+    public function create($name, array $args = [])
+    {
+        return $this->_diContainer->create($name, $args);
+    }
 
-	/**
-	 * Logs with an arbitrary level.
-	 *
-	 * @param mixed $level
-	 * @param string $message
-	 * @param array $context
-	 * @return null
-	 */
-	public function log($level, $message, array $context = array())
-	{
-		$this->_logger->log($level, $message, $context);
-	}
+    /**
+     * Logs with an arbitrary level.
+     *
+     * @param mixed $level
+     * @param string $message
+     * @param array $context
+     * @return null
+     */
+    public function log($level, $message, array $context = array())
+    {
+        $this->_logger->log($level, $message, $context);
+    }
 }
