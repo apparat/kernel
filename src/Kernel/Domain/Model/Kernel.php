@@ -8,7 +8,7 @@
  * @subpackage  Apparat\Kernel\Domain
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
- * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
+ * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
 /***********************************************************************************
@@ -53,13 +53,13 @@ class Kernel
      *
      * @var DependencyInjectionContainerInterface
      */
-    protected $_diContainer;
+    protected $diContainer;
     /**
      * Logger
      *
      * @var LoggerInterface
      */
-    protected $_logger;
+    protected $logger;
 
     /**
      * Kernel constructor
@@ -71,8 +71,8 @@ class Kernel
         DependencyInjectionContainerInterface $diContainer,
         LoggerInterface $logger
     ) {
-        $this->_diContainer = $diContainer;
-        $this->_logger = $logger;
+        $this->diContainer = $diContainer;
+        $this->logger = $logger;
     }
 
     /**
@@ -83,7 +83,7 @@ class Kernel
     public function register(ModuleInterface $module)
     {
         // Apply module specific dependency injection configuration
-        $this->_diContainer->configure($module);
+        $this->diContainer->configure($module);
     }
 
     /**
@@ -95,7 +95,7 @@ class Kernel
      */
     public function create($name, array $args = [])
     {
-        return $this->_diContainer->create($name, $args);
+        return $this->diContainer->create($name, $args);
     }
 
     /**
@@ -108,6 +108,6 @@ class Kernel
      */
     public function log($level, $message, array $context = array())
     {
-        $this->_logger->log($level, $message, $context);
+        $this->logger->log($level, $message, $context);
     }
 }

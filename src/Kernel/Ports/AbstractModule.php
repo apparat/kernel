@@ -8,7 +8,7 @@
  * @subpackage  Apparat\Kernel\Ports
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
- * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
+ * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
 /***********************************************************************************
@@ -90,7 +90,7 @@ abstract class AbstractModule implements ModuleInterface
     {
         // Validate the environment
         $reflectionClass = new \ReflectionClass(static::class);
-        static::_validateEnvironment(static::_environment(dirname(dirname(dirname($reflectionClass->getFileName())))));
+        static::validateEnvironment(static::environment(dirname(dirname(dirname($reflectionClass->getFileName())))));
 
         // Register the module
         Kernel::register(new static);
@@ -106,7 +106,7 @@ abstract class AbstractModule implements ModuleInterface
      * @param string $directory Directory with .env file
      * @return Dotenv Environment instance
      */
-    protected static function _environment($directory)
+    protected static function environment($directory)
     {
         // Instantiate the environment abstraction
         $dotenv = new Dotenv($directory);
@@ -122,7 +122,7 @@ abstract class AbstractModule implements ModuleInterface
      *
      * @param Dotenv $environment Environment
      */
-    protected static function _validateEnvironment(Dotenv $environment)
+    protected static function validateEnvironment(Dotenv $environment)
     {
         // Overwrite in module implementations
     }

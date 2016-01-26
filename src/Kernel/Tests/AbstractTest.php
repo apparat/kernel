@@ -8,7 +8,7 @@
  * @subpackage  Apparat\Object\Infrastructure
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
- * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
+ * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
 /***********************************************************************************
@@ -49,7 +49,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
      *
      * @var array
      */
-    protected $_tmpFiles = array();
+    protected $tmpFiles = array();
 
     /**
      * Tests if two arrays equal in their keys and values
@@ -60,7 +60,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
      */
     public function assertArrayEquals(array $expected, array $actual, $message = '')
     {
-        $this->assertEquals($this->_sortArrayForComparison($expected), $this->_sortArrayForComparison($actual),
+        $this->assertEquals($this->sortArrayForComparison($expected), $this->sortArrayForComparison($actual),
             $message);
     }
 
@@ -70,7 +70,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
      * @param array $array Array
      * @return array                Sorted array
      */
-    protected function _sortArrayForComparison(array $array)
+    protected function sortArrayForComparison(array $array)
     {
 
         // Tests if all array keys are numeric
@@ -85,11 +85,11 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
         // If not all keys are numeric: Sort the array by key
         if (!$allNumeric) {
             ksort($array, SORT_STRING);
-            return $this->_sortArrayRecursive($array);
+            return $this->sortArrayRecursive($array);
         }
 
         // Sort them by data type and value
-        $array = $this->_sortArrayRecursive($array);
+        $array = $this->sortArrayRecursive($array);
         usort($array, function ($first, $second) {
             $aType = gettype($first);
             $bType = gettype($second);
@@ -119,14 +119,14 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
      * @param array $array Original array
      * @return array Sorted array
      */
-    protected function _sortArrayRecursive(array $array)
+    protected function sortArrayRecursive(array $array)
     {
 
         // Run through all elements and sort them recursively if they are an array
         reset($array);
         while (list($key, $value) = each($array)) {
             if (is_array($value)) {
-                $array[$key] = $this->_sortArrayForComparison($value);
+                $array[$key] = $this->sortArrayForComparison($value);
             }
         }
 
@@ -138,7 +138,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        foreach ($this->_tmpFiles as $tmpFile) {
+        foreach ($this->tmpFiles as $tmpFile) {
             @is_file($tmpFile) ? @unlink($tmpFile) : @rmdir($tmpFile);
         }
     }
@@ -152,9 +152,9 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
      *
      * @return string Temporary file name
      */
-    protected function _createTemporaryFileName()
+    protected function createTemporaryFileName()
     {
-        $tempFileName = $this->_createTemporaryFile();
+        $tempFileName = $this->createTemporaryFile();
         @unlink($tempFileName);
         return $tempFileName;
     }
@@ -164,9 +164,9 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
      *
      * @return string Temporary file name
      */
-    protected function _createTemporaryFile()
+    protected function createTemporaryFile()
     {
-        return $this->_tmpFiles[] = tempnam(sys_get_temp_dir(), 'apparat_test_');
+        return $this->tmpFiles[] = tempnam(sys_get_temp_dir(), 'apparat_test_');
     }
 
     /**
@@ -175,7 +175,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
      * @param string $html Original HTML
      * @return string Normalized HTML
      */
-    protected function _normalizeHtml($html)
+    protected function normalizeHtml($html)
     {
         $htmlDom = new \DOMDocument();
         $htmlDom->preserveWhiteSpace = false;

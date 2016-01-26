@@ -8,7 +8,7 @@
  * @subpackage  Apparat\Kernel\Tests
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
- * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
+ * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
 /***********************************************************************************
@@ -53,7 +53,7 @@ class LoggerTest extends AbstractTest
     public function testSyslogLogger()
     {
         putenv('APP_LOG=syslog:test');
-        $this->_testLogger();
+        $this->doTestLogger();
     }
 
     /**
@@ -62,7 +62,7 @@ class LoggerTest extends AbstractTest
     public function testErrorlogLogger()
     {
         putenv('APP_LOG=errorlog');
-        $this->_testLogger();
+        $this->doTestLogger();
     }
 
     /**
@@ -70,7 +70,7 @@ class LoggerTest extends AbstractTest
      */
     public function testStreamLogger()
     {
-        $logfile = $this->_createTemporaryFile();
+        $logfile = $this->createTemporaryFile();
         $randomLog = md5(microtime(true));
         putenv('APP_LOG=stream:file://'.$logfile);
         $streamLogger = new Logger('test');
@@ -86,7 +86,7 @@ class LoggerTest extends AbstractTest
     public function testNullLogger()
     {
         putenv('APP_LOG=null');
-        $this->_testLogger();
+        $this->doTestLogger();
     }
 
     /**
@@ -108,7 +108,7 @@ class LoggerTest extends AbstractTest
     /**
      * Test the currently configured logger
      */
-    protected function _testLogger()
+    protected function doTestLogger()
     {
         $logger = new Logger('test');
         $this->assertInstanceOf(Logger::class, $logger);

@@ -8,7 +8,7 @@
  * @subpackage  Apparat\Kernel\<Layer>
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
- * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
+ * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
 /***********************************************************************************
@@ -53,14 +53,14 @@ class DiceAdapter implements DependencyInjectionContainerInterface
      *
      * @var Dice
      */
-    protected $_dice = null;
+    protected $dice = null;
 
     /**
      * Dice adapter constructor
      */
     public function __construct()
     {
-        $this->_dice = new Dice();
+        $this->dice = new Dice();
     }
 
     /**
@@ -82,6 +82,6 @@ class DiceAdapter implements DependencyInjectionContainerInterface
      */
     public function create($name, array $args = [])
     {
-        return $this->_dice->create($name, $args);
+        return $this->dice->create($name, $args);
     }
 }

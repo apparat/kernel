@@ -8,7 +8,7 @@
  * @subpackage  Apparat\Kernel\Ports
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
- * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
+ * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
 /***********************************************************************************
@@ -54,7 +54,7 @@ class Kernel
      *
      * @var \Apparat\Kernel\Domain\Model\Kernel
      */
-    protected static $_kernel = null;
+    protected static $kernel = null;
 
     /*******************************************************************************
      * PUBLIC METHODS
@@ -67,7 +67,7 @@ class Kernel
      */
     public static function register(ModuleInterface $module)
     {
-        self::_kernel()->register($module);
+        self::kernel()->register($module);
     }
 
     /**
@@ -79,7 +79,7 @@ class Kernel
      */
     public static function create($name, array $args = [])
     {
-        return self::_kernel()->create($name, $args);
+        return self::kernel()->create($name, $args);
     }
 
     /**
@@ -91,7 +91,7 @@ class Kernel
      */
     public static function emergency($message, array $context = array())
     {
-        self::_kernel()->log(LogLevel::EMERGENCY, $message, $context);
+        self::kernel()->log(LogLevel::EMERGENCY, $message, $context);
     }
 
     /**
@@ -106,7 +106,7 @@ class Kernel
      */
     public static function alert($message, array $context = array())
     {
-        self::_kernel()->log(LogLevel::ALERT, $message, $context);
+        self::kernel()->log(LogLevel::ALERT, $message, $context);
     }
 
     /**
@@ -120,7 +120,7 @@ class Kernel
      */
     public static function critical($message, array $context = array())
     {
-        self::_kernel()->log(LogLevel::CRITICAL, $message, $context);
+        self::kernel()->log(LogLevel::CRITICAL, $message, $context);
     }
 
     /**
@@ -133,7 +133,7 @@ class Kernel
      */
     public static function error($message, array $context = array())
     {
-        self::_kernel()->log(LogLevel::ERROR, $message, $context);
+        self::kernel()->log(LogLevel::ERROR, $message, $context);
     }
 
     /**
@@ -148,7 +148,7 @@ class Kernel
      */
     public static function warning($message, array $context = array())
     {
-        self::_kernel()->log(LogLevel::WARNING, $message, $context);
+        self::kernel()->log(LogLevel::WARNING, $message, $context);
     }
 
     /**
@@ -160,7 +160,7 @@ class Kernel
      */
     public static function notice($message, array $context = array())
     {
-        self::_kernel()->log(LogLevel::NOTICE, $message, $context);
+        self::kernel()->log(LogLevel::NOTICE, $message, $context);
     }
 
     /**
@@ -174,7 +174,7 @@ class Kernel
      */
     public static function info($message, array $context = array())
     {
-        self::_kernel()->log(LogLevel::INFO, $message, $context);
+        self::kernel()->log(LogLevel::INFO, $message, $context);
     }
 
     /**
@@ -186,7 +186,7 @@ class Kernel
      */
     public static function debug($message, array $context = array())
     {
-        self::_kernel()->log(LogLevel::DEBUG, $message, $context);
+        self::kernel()->log(LogLevel::DEBUG, $message, $context);
     }
 
     /**
@@ -199,7 +199,7 @@ class Kernel
      */
     public static function log($level, $message, array $context = array())
     {
-        self::_kernel()->log($level, $message, $context);
+        self::kernel()->log($level, $message, $context);
     }
 
     /*******************************************************************************
@@ -211,12 +211,12 @@ class Kernel
      *
      * @return \Apparat\Kernel\Domain\Model\Kernel Kernel instance
      */
-    protected static function _kernel()
+    protected static function kernel()
     {
-        if (self::$_kernel === null) {
-            self::$_kernel = new \Apparat\Kernel\Domain\Model\Kernel(new DiceAdapter(), new Logger());
+        if (self::$kernel === null) {
+            self::$kernel = new \Apparat\Kernel\Domain\Model\Kernel(new DiceAdapter(), new Logger());
         }
 
-        return self::$_kernel;
+        return self::$kernel;
     }
 }

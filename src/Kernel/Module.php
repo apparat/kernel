@@ -8,7 +8,7 @@
  * @subpackage  Apparat\Kernel
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
- * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
+ * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
 /***********************************************************************************
@@ -80,9 +80,9 @@ class Module extends AbstractModule
      *
      * @param Dotenv $environment Environment
      */
-    protected static function _validateEnvironment(Dotenv $environment)
+    protected static function validateEnvironment(Dotenv $environment)
     {
-        parent::_validateEnvironment($environment);
+        parent::validateEnvironment($environment);
 
         $environment->required('APP_LOG')->notEmpty();
     }

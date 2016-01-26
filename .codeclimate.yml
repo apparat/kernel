@@ -11,17 +11,15 @@ engines:
     checks:
       Controversial/CamelCasePropertyName:
         enabled: true
-        allow-underscore: true
       Controversial/CamelCaseMethodName:
         enabled: true
-        allow-underscore: true
       CleanCode/StaticAccess:
         enabled: false
       Design/TooManyMethods:
         enabled: true
         maxmethods: 25
       Design/TooManyPublicMethods:
-        enabled: false
+        enabled: true
         maxmethods: 25
   phpcodesniffer:
     enabled: true
