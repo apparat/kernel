@@ -65,7 +65,6 @@ abstract class AbstractLogger extends Logger
 
         // Instantiate the configured logger
         switch ($handler) {
-
             // Syslog handler
             case 'syslog':
                 $handlers[] = new SyslogHandler(...$arguments);
@@ -88,8 +87,10 @@ abstract class AbstractLogger extends Logger
 
             // Unsupported handler
             default:
-                throw new RuntimeException(sprintf('Unsupported log handler "%s"', $handler),
-                    RuntimeException::UNSUPPORTED_LOG_HANDLER);
+                throw new RuntimeException(
+                    sprintf('Unsupported log handler "%s"', $handler),
+                    RuntimeException::UNSUPPORTED_LOG_HANDLER
+                );
                 break;
         }
 

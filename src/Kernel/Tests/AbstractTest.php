@@ -60,8 +60,11 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
      */
     public function assertArrayEquals(array $expected, array $actual, $message = '')
     {
-        $this->assertEquals($this->sortArrayForComparison($expected), $this->sortArrayForComparison($actual),
-            $message);
+        $this->assertEquals(
+            $this->sortArrayForComparison($expected),
+            $this->sortArrayForComparison($actual),
+            $message
+        );
     }
 
     /**
@@ -90,7 +93,8 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 
         // Sort them by data type and value
         $array = $this->sortArrayRecursive($array);
-        usort($array, function ($first, $second) {
+        usort(
+            $array, function ($first, $second) {
             $aType = gettype($first);
             $bType = gettype($second);
             if ($aType === $bType) {
@@ -108,7 +112,8 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
             }
 
             return strcmp($aType, $bType);
-        });
+        }
+        );
 
         return $array;
     }

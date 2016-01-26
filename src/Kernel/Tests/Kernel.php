@@ -5,10 +5,10 @@
  *
  * @category    Apparat
  * @package     Apparat\Kernel
- * @subpackage  Apparat\Kernel\<Layer>
+ * @subpackage  Apparat\Kernel\Test
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
- * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
  */
 
 /***********************************************************************************
@@ -36,37 +36,18 @@
 
 namespace ApparatTest;
 
-use Apparat\Kernel\Infrastructure\Logger;
-use Apparat\Kernel\Module;
-use Psr\Log\LogLevel;
-
 /**
- * Kernel tests
+ * Extended kernel for testing purposes
  *
  * @package Apparat\Kernel
  * @subpackage ApparatTest
  */
-class KernelTest extends AbstractTest
+class Kernel extends \Apparat\Kernel\Ports\Kernel
 {
-    /**
-     * Test the log-levels
-     */
-    public function testLogging()
+
+    // Reset the kernel instance
+    public static function reset()
     {
-        Kernel::reset();
-
-        Module::autorun();
-
-        Kernel::emergency(LogLevel::EMERGENCY);
-        Kernel::alert(LogLevel::ALERT);
-        Kernel::critical(LogLevel::CRITICAL);
-        Kernel::error(LogLevel::ERROR);
-        Kernel::warning(LogLevel::WARNING);
-        Kernel::notice(LogLevel::NOTICE);
-        Kernel::info(LogLevel::INFO);
-        Kernel::debug(LogLevel::DEBUG);
-        Kernel::log(LogLevel::INFO, LogLevel::INFO);
-
-        $this->assertInstanceOf(Logger::class, Kernel::create(Logger::class));
+        self::$kernel = null;
     }
 }
