@@ -11,12 +11,16 @@ engines:
     checks:
       Controversial/CamelCasePropertyName:
         enabled: true
-        allow-underscore: true
+        allow-underscore: 1
       Controversial/CamelCaseMethodName:
         enabled: true
-        allow-underscore: true
+        allow-underscore: 1
       CleanCode/StaticAccess:
         enabled: false
+      Design/TooManyMethods:
+        maxmethods: 25
+      Design/TooManyPublicMethods:
+        maxmethods: 25
 ratings:
   paths:
   - "**.inc"

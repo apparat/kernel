@@ -53,7 +53,7 @@ class Kernel
 	 *
 	 * @var DependencyInjectionContainerInterface
 	 */
-	protected $_dependencyInjectionContainer;
+	protected $_diContainer;
 	/**
 	 * Logger
 	 *
