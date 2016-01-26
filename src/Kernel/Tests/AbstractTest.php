@@ -75,7 +75,6 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
      */
     protected function sortArrayForComparison(array $array)
     {
-
         // Tests if all array keys are numeric
         $allNumeric = true;
         foreach (array_keys($array) as $key) {
@@ -94,7 +93,10 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
         // Sort them by data type and value
         $array = $this->sortArrayRecursive($array);
         usort(
-            $array, function ($first, $second) {
+            $array, function (
+            $first,
+            $second
+        ) {
             $aType = gettype($first);
             $bType = gettype($second);
             if ($aType === $bType) {
@@ -189,3 +191,4 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
         return $htmlDom->saveXML();
     }
 }
+

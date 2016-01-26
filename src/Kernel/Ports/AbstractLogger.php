@@ -97,3 +97,4 @@ abstract class AbstractLogger extends Logger
         parent::__construct($name, $handlers);
     }
 }
+
