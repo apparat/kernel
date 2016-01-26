@@ -51,8 +51,7 @@ class ModuleTest extends AbstractTest
      */
     public function testModuleAutorun()
     {
-        Module::autorun();
-
+        include dirname(__DIR__).DIRECTORY_SEPARATOR.'Autorun.php';
         $this->assertEquals(Module::NAME, (new Module())->getName());
     }
 }
