@@ -9,27 +9,30 @@ engines:
   phpmd:
     enabled: true
     checks:
-      Controversial/CamelCasePropertyName:
-        enabled: true
-        allow-underscore: on
-      Controversial/CamelCaseMethodName:
-        enabled: true
-        allow-underscore: on
-      CleanCode/StaticAccess:
-        enabled: false
-      Design/TooManyMethods:
-        enabled: true
-        maxmethods: 25
-      Design/TooManyPublicMethods:
-        enabled: true
-        maxmethods: 25
+      Controversial:
+        CamelCasePropertyName:
+          enabled: true
+          allow-underscore: true
+        CamelCaseMethodName:
+          enabled: true
+          allow-underscore: true
+      CleanCode:
+        StaticAccess:
+          enabled: false
+      Design:
+        TooManyMethods:
+          enabled: true
+          maxmethods: 25
+        TooManyPublicMethods:
+          enabled: false
+          maxmethods: 25
+  phpcodesniffer:
+    enabled: true
+    config:
+      file_extensions: "php"
+      standard: "PSR1,PSR2"
 ratings:
   paths:
-  - "**.inc"
-  - "**.js"
-  - "**.jsx"
-  - "**.module"
   - "**.php"
-  - "**.py"
-  - "**.rb"
-exclude_paths: []
+exclude_paths:
+- .git/**/*
