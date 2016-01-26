@@ -46,10 +46,12 @@ use Psr\Log\LogLevel;
  * @package Apparat\Kernel
  * @subpackage ApparatTest
  */
-class Kernel extends \Apparat\Kernel\Ports\Kernel {
+class Kernel extends \Apparat\Kernel\Ports\Kernel
+{
 
 	// Reset the kernel instance
-	public static function reset() {
+	public static function reset()
+	{
 		self::$_kernel = null;
 	}
 }

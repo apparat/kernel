@@ -50,7 +50,8 @@ class LoggerTest extends AbstractTest
 	/**
 	 * Test the syslog logger
 	 */
-	public function testSyslogLogger() {
+	public function testSyslogLogger()
+	{
 		putenv('APP_LOG=syslog:test');
 		$this->_testLogger();
 	}
@@ -58,7 +59,8 @@ class LoggerTest extends AbstractTest
 	/**
 	 * Test the errorlog logger
 	 */
-	public function testErrorlogLogger() {
+	public function testErrorlogLogger()
+	{
 		putenv('APP_LOG=errorlog');
 		$this->_testLogger();
 	}
@@ -66,7 +68,8 @@ class LoggerTest extends AbstractTest
 	/**
 	 * Test the stream logger
 	 */
-	public function testStreamLogger() {
+	public function testStreamLogger()
+	{
 		$logfile = $this->_createTemporaryFile();
 		$randomLog = md5(microtime(true));
 		putenv('APP_LOG=stream:file://'.$logfile);
@@ -80,7 +83,8 @@ class LoggerTest extends AbstractTest
 	/**
 	 * Test the null logger
 	 */
-	public function testNullLogger() {
+	public function testNullLogger()
+	{
 		putenv('APP_LOG=null');
 		$this->_testLogger();
 	}
@@ -91,7 +95,8 @@ class LoggerTest extends AbstractTest
 	 * @expectedException \Apparat\Kernel\Common\RuntimeException
 	 * @expectedExceptionCode 1453587845
 	 */
-	public function testInvalidLogger() {
+	public function testInvalidLogger()
+	{
 		putenv('APP_LOG=invalid');
 		new Logger('test');
 	}
@@ -103,7 +108,8 @@ class LoggerTest extends AbstractTest
 	/**
 	 * Test the currently configured logger
 	 */
-	protected function _testLogger() {
+	protected function _testLogger()
+	{
 		$logger = new Logger('test');
 		$this->assertInstanceOf(Logger::class, $logger);
 		$this->assertEquals(Module::NAME, $logger->getName());

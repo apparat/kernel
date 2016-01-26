@@ -42,8 +42,15 @@ namespace Apparat\Kernel\Domain\Contract;
  * @package Apparat\Kernel
  * @subpackage Apparat\Kernel\Domain
  */
-Interface ModuleInterface
+interface ModuleInterface
 {
+	/**
+	 * Auto-run
+	 *
+	 * @return void
+	 */
+	public static function autorun();
+
 	/**
 	 * Configure the dependency injection container
 	 *
@@ -58,11 +65,4 @@ Interface ModuleInterface
 	 * @return string Module name
 	 */
 	public function getName();
-
-	/**
-	 * Auto-run
-	 *
-	 * @return void
-	 */
-	public static function autorun();
 }

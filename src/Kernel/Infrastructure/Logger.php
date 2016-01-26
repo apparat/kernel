@@ -36,8 +36,8 @@
 
 namespace Apparat\Kernel\Infrastructure;
 
-use Apparat\Kernel\Ports\AbstractLogger;
 use Apparat\Kernel\Module;
+use Apparat\Kernel\Ports\AbstractLogger;
 
 /**
  * Kernel logger

@@ -52,38 +52,6 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 	protected $_tmpFiles = array();
 
 	/**
-	 * Tears down the fixture
-	 */
-	protected function tearDown()
-	{
-		foreach ($this->_tmpFiles as $tmpFile) {
-			@is_file($tmpFile) ? @unlink($tmpFile) : @rmdir($tmpFile);
-		}
-	}
-
-	/**
-	 * Prepare and register a temporary file
-	 *
-	 * @return string Temporary file name
-	 */
-	protected function _createTemporaryFile()
-	{
-		return $this->_tmpFiles[] = tempnam(sys_get_temp_dir(), 'apparat_test_');
-	}
-
-	/**
-	 * Prepare and register a temporary file name
-	 *
-	 * @return string Temporary file name
-	 */
-	protected function _createTemporaryFileName()
-	{
-		$tempFileName = $this->_createTemporaryFile();
-		@unlink($tempFileName);
-		return $tempFileName;
-	}
-
-	/**
 	 * Tests if two arrays equal in their keys and values
 	 *
 	 * @param array $expected Expected result
@@ -95,10 +63,6 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($this->_sortArrayForComparison($expected), $this->_sortArrayForComparison($actual),
 			$message);
 	}
-
-	/*******************************************************************************
-	 * PRIVATE METHODS
-	 *******************************************************************************/
 
 	/**
 	 * Recursively sort an array for comparison with another array
@@ -155,7 +119,8 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 	 * @param array $array Original array
 	 * @return array Sorted array
 	 */
-	protected function _sortArrayRecursive(array $array) {
+	protected function _sortArrayRecursive(array $array)
+	{
 
 		// Run through all elements and sort them recursively if they are an array
 		reset($array);
@@ -166,6 +131,42 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 		}
 
 		return $array;
+	}
+
+	/**
+	 * Tears down the fixture
+	 */
+	protected function tearDown()
+	{
+		foreach ($this->_tmpFiles as $tmpFile) {
+			@is_file($tmpFile) ? @unlink($tmpFile) : @rmdir($tmpFile);
+		}
+	}
+
+	/*******************************************************************************
+	 * PRIVATE METHODS
+	 *******************************************************************************/
+
+	/**
+	 * Prepare and register a temporary file name
+	 *
+	 * @return string Temporary file name
+	 */
+	protected function _createTemporaryFileName()
+	{
+		$tempFileName = $this->_createTemporaryFile();
+		@unlink($tempFileName);
+		return $tempFileName;
+	}
+
+	/**
+	 * Prepare and register a temporary file
+	 *
+	 * @return string Temporary file name
+	 */
+	protected function _createTemporaryFile()
+	{
+		return $this->_tmpFiles[] = tempnam(sys_get_temp_dir(), 'apparat_test_');
 	}
 
 	/**

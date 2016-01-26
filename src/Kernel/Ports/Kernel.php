@@ -197,7 +197,8 @@ class Kernel
 	 * @param array $context
 	 * @return null
 	 */
-	public static function log($level, $message, array $context = array()) {
+	public static function log($level, $message, array $context = array())
+	{
 		self::_kernel()->log($level, $message, $context);
 	}
 
