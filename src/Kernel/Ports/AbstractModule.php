@@ -89,7 +89,7 @@ abstract class AbstractModule implements ModuleInterface
     {
         // Validate the environment
         $reflectionClass = new \ReflectionClass(static::class);
-        static::validateEnvironment(static::environment(dirname(dirname(dirname($reflectionClass->getFileName())))));
+        static::validateEnvironment(static::environment(dirname($reflectionClass->getFileName())));
 
         // Register the module
         Kernel::register(new static);
@@ -107,9 +107,18 @@ abstract class AbstractModule implements ModuleInterface
      */
     protected static function environment($directory)
     {
+        $envDirectory = $directory;
+
+        // Find the closest environment definition
+        do {
+            if (@is_file($envDirectory.DIRECTORY_SEPARATOR.'.env')) {
+                break;
+            }
+        } while($envDirectory = dirname($envDirectory));
+
         // Instantiate the environment abstraction
-        $dotenv = new Dotenv($directory);
-        if (getenv('APP_ENV') === 'development') {
+        $dotenv = new Dotenv($envDirectory ?: $directory);
+        if ($envDirectory && (getenv('APP_ENV') === 'development')) {
             $dotenv->load();
         }
 
