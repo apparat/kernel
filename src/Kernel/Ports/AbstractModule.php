@@ -107,14 +107,16 @@ abstract class AbstractModule implements ModuleInterface
      */
     protected static function environment($directory)
     {
+        // Find a valid environment file
         $envDirectory = $directory;
-
-        // Find the closest environment definition
-        do {
-            if (@is_file($envDirectory.DIRECTORY_SEPARATOR.'.env')) {
+        while (!@is_file($envDirectory.DIRECTORY_SEPARATOR.'.env')) {
+            $upEnvDirectory = dirname($envDirectory);
+            if (!strlen($upEnvDirectory) || ($upEnvDirectory == $envDirectory)) {
+                $envDirectory = null;
                 break;
             }
-        } while($envDirectory = dirname($envDirectory));
+            $envDirectory = $upEnvDirectory;
+        }
 
         // Instantiate the environment abstraction
         $dotenv = new Dotenv($envDirectory ?: $directory);
