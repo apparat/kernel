@@ -34,7 +34,7 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-namespace ApparatTest;
+namespace Apparat\Kernel\Tests;
 
 use Apparat\Kernel\Infrastructure\Logger;
 use Apparat\Kernel\Module;
@@ -43,7 +43,7 @@ use Apparat\Kernel\Module;
  * Logger tests
  *
  * @package Apparat\Kernel
- * @subpackage ApparatTest
+ * @subpackage Apparat\Kernel\Tests
  */
 class LoggerTest extends AbstractTest
 {

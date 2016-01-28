@@ -34,7 +34,7 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-namespace ApparatTest;
+namespace Apparat\Kernel\Tests;
 
 use Apparat\Kernel\Infrastructure\Logger;
 use Apparat\Kernel\Module;
@@ -44,7 +44,7 @@ use Psr\Log\LogLevel;
  * Kernel tests
  *
  * @package Apparat\Kernel
- * @subpackage ApparatTest
+ * @subpackage Apparat\Kernel\Tests
  */
 class KernelTest extends AbstractTest
 {

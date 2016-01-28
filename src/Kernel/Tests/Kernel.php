@@ -34,13 +34,13 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-namespace ApparatTest;
+namespace Apparat\Kernel\Tests;
 
 /**
  * Extended kernel for testing purposes
  *
  * @package Apparat\Kernel
- * @subpackage ApparatTest
+ * @subpackage Apparat\Kernel\Tests
  */
 class Kernel extends \Apparat\Kernel\Ports\Kernel
 {

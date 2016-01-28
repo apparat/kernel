@@ -34,7 +34,7 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-namespace ApparatTest;
+namespace Apparat\Kernel\Tests;
 
 use Apparat\Kernel\Module;
 
@@ -42,7 +42,7 @@ use Apparat\Kernel\Module;
  * Module tests
  *
  * @package Apparat\Kernel
- * @subpackage ApparatTest
+ * @subpackage Apparat\Kernel\Tests
  */
 class ModuleTest extends AbstractTest
 {
