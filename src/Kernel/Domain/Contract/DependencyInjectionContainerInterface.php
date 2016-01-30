@@ -44,12 +44,6 @@ namespace Apparat\Kernel\Domain\Contract;
  */
 interface DependencyInjectionContainerInterface
 {
-    /**
-     * Apply a module specific dependency injection configuration
-     *
-     * @param ModuleInterface $module Module
-     */
-    public function configure(ModuleInterface $module);
 
     /**
      * Create an object instance

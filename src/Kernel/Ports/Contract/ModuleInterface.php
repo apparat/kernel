@@ -5,7 +5,7 @@
  *
  * @category    Apparat
  * @package     Apparat\Kernel
- * @subpackage  Apparat\Kernel\Ports
+ * @subpackage  Apparat\Kernel\Domain
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
@@ -34,15 +34,21 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-namespace Apparat\Kernel\Ports;
+namespace Apparat\Kernel\Ports\Contract;
 
 /**
- * Dependency Injection container interface
+ * Kernel module interface
  *
  * @package Apparat\Kernel
- * @subpackage Apparat\Kernel\Ports
+ * @subpackage Apparat\Kernel\Domain
  */
-interface DependencyInjectionContainerInterface extends \Apparat\Kernel\Domain\Contract\DependencyInjectionContainerInterface
+interface ModuleInterface extends \Apparat\Kernel\Domain\Contract\ModuleInterface
 {
-
+    /**
+     * Configure the dependency injection container
+     *
+     * @param DependencyInjectionContainerInterface $diContainer Dependency injection container
+     * @return void
+     */
+    public function configureDependencyInjection(DependencyInjectionContainerInterface $diContainer);
 }

@@ -52,14 +52,6 @@ interface ModuleInterface
     public static function autorun();
 
     /**
-     * Configure the dependency injection container
-     *
-     * @param DependencyInjectionContainerInterface $diContainer Dependency injection container
-     * @return void
-     */
-    public function configureDependencyInjection(DependencyInjectionContainerInterface $diContainer);
-
-    /**
      * Return the module name
      *
      * @return string Module name

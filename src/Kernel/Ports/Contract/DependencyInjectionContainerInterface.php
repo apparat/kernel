@@ -5,7 +5,7 @@
  *
  * @category    Apparat
  * @package     Apparat\Kernel
- * @subpackage  Apparat\Kernel
+ * @subpackage  Apparat\Kernel\Ports
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
@@ -34,56 +34,20 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-namespace Apparat\Kernel;
-
-use Apparat\Kernel\Ports\Contract\DependencyInjectionContainerInterface;
-use Apparat\Kernel\Ports\AbstractModule;
-use Dotenv\Dotenv;
+namespace Apparat\Kernel\Ports\Contract;
 
 /**
- * Kernel module
+ * Dependency Injection container interface
  *
  * @package Apparat\Kernel
- * @subpackage Apparat\Kernel
+ * @subpackage Apparat\Kernel\Ports
  */
-class Module extends AbstractModule
+interface DependencyInjectionContainerInterface extends \Apparat\Kernel\Domain\Contract\DependencyInjectionContainerInterface
 {
     /**
-     * Module name
+     * Apply a module specific dependency injection configuration
      *
-     * @var string
+     * @param ModuleInterface $module Module
      */
-    const NAME = 'kernel';
-
-    /*******************************************************************************
-     * PUBLIC METHODS
-     *******************************************************************************/
-
-    /**
-     * Configure the dependency injection container
-     *
-     * @param DependencyInjectionContainerInterface $diContainer Dependency injection container
-     * @return void
-     * @see https://r.je/dice.html#example3-6
-     */
-    public function configureDependencyInjection(DependencyInjectionContainerInterface $diContainer)
-    {
-        parent::configureDependencyInjection($diContainer);
-    }
-
-    /*******************************************************************************
-     * PRIVATE METHODS
-     *******************************************************************************/
-
-    /**
-     * Validate the environment
-     *
-     * @param Dotenv $environment Environment
-     */
-    protected static function validateEnvironment(Dotenv $environment)
-    {
-        parent::validateEnvironment($environment);
-
-        $environment->required('APP_LOG')->notEmpty();
-    }
+    public function configure(ModuleInterface $module);
 }

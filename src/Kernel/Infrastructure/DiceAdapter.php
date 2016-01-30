@@ -36,8 +36,8 @@
 
 namespace Apparat\Kernel\Infrastructure;
 
-use Apparat\Kernel\Domain\Contract\DependencyInjectionContainerInterface;
-use Apparat\Kernel\Domain\Contract\ModuleInterface;
+use Apparat\Kernel\Ports\Contract\DependencyInjectionContainerInterface;
+use Apparat\Kernel\Ports\Contract\ModuleInterface;
 use Dice\Dice;
 
 /**
