@@ -73,7 +73,7 @@ class LoggerTest extends AbstractTest
         $logfile = $this->createTemporaryFile();
         $randomLog = md5(microtime(true));
         putenv('APP_LOG=stream:file://'.$logfile);
-        $streamLogger = new Logger('test');
+        $streamLogger = new Logger();
         $streamLogger->info($randomLog);
         $this->assertInstanceOf(Logger::class, $streamLogger);
         $this->assertEquals(Module::NAME, $streamLogger->getName());
@@ -98,19 +98,20 @@ class LoggerTest extends AbstractTest
     public function testInvalidLogger()
     {
         putenv('APP_LOG=invalid');
-        new Logger('test');
+        new Logger();
     }
 
     /*******************************************************************************
      * PRIVATE METHODS
      *******************************************************************************/
 
+
     /**
      * Test the currently configured logger
      */
     protected function doTestLogger()
     {
-        $logger = new Logger('test');
+        $logger = new Logger();
         $this->assertInstanceOf(Logger::class, $logger);
         $this->assertEquals(Module::NAME, $logger->getName());
     }

@@ -116,7 +116,7 @@ abstract class AbstractModule implements ModuleInterface
             }
             $upEnvDirectory = $envDirectory;
             $envDirectory = dirname($envDirectory);
-        } while(strlen($upEnvDirectory) && ($upEnvDirectory != $envDirectory));
+        } while (strlen($upEnvDirectory) && ($upEnvDirectory != $envDirectory));
 
         // Load all collected environment files
         if (getenv('APP_ENV') === 'development') {

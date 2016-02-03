@@ -104,13 +104,10 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
                     switch ($aType) {
                         case 'array':
                             return strcmp(implode('', array_keys($first)), implode('', array_keys($second)));
-                            break;
                         case 'object':
                             return strcmp(spl_object_hash($first), spl_object_hash($second));
-                            break;
                         default:
                             return strcmp(strval($first), strval($second));
-                            break;
                     }
                 }
 
@@ -163,7 +160,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
     protected function createTemporaryFileName()
     {
         $tempFileName = $this->createTemporaryFile();
-        @unlink($tempFileName);
+        unlink($tempFileName);
         return $tempFileName;
     }
 

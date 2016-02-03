@@ -67,7 +67,7 @@ class Kernel
      */
     public static function register(ModuleInterface $module)
     {
-        self::kernel()->register($module);
+        self::getKernel()->register($module);
     }
 
     /**
@@ -79,7 +79,7 @@ class Kernel
      */
     public static function create($name, array $args = [])
     {
-        return self::kernel()->create($name, $args);
+        return self::getKernel()->create($name, $args);
     }
 
     /**
@@ -91,7 +91,7 @@ class Kernel
      */
     public static function emergency($message, array $context = array())
     {
-        self::kernel()->log(LogLevel::EMERGENCY, $message, $context);
+        self::getKernel()->log(LogLevel::EMERGENCY, $message, $context);
     }
 
     /**
@@ -106,7 +106,7 @@ class Kernel
      */
     public static function alert($message, array $context = array())
     {
-        self::kernel()->log(LogLevel::ALERT, $message, $context);
+        self::getKernel()->log(LogLevel::ALERT, $message, $context);
     }
 
     /**
@@ -120,7 +120,7 @@ class Kernel
      */
     public static function critical($message, array $context = array())
     {
-        self::kernel()->log(LogLevel::CRITICAL, $message, $context);
+        self::getKernel()->log(LogLevel::CRITICAL, $message, $context);
     }
 
     /**
@@ -133,7 +133,7 @@ class Kernel
      */
     public static function error($message, array $context = array())
     {
-        self::kernel()->log(LogLevel::ERROR, $message, $context);
+        self::getKernel()->log(LogLevel::ERROR, $message, $context);
     }
 
     /**
@@ -148,7 +148,7 @@ class Kernel
      */
     public static function warning($message, array $context = array())
     {
-        self::kernel()->log(LogLevel::WARNING, $message, $context);
+        self::getKernel()->log(LogLevel::WARNING, $message, $context);
     }
 
     /**
@@ -160,7 +160,7 @@ class Kernel
      */
     public static function notice($message, array $context = array())
     {
-        self::kernel()->log(LogLevel::NOTICE, $message, $context);
+        self::getKernel()->log(LogLevel::NOTICE, $message, $context);
     }
 
     /**
@@ -174,7 +174,7 @@ class Kernel
      */
     public static function info($message, array $context = array())
     {
-        self::kernel()->log(LogLevel::INFO, $message, $context);
+        self::getKernel()->log(LogLevel::INFO, $message, $context);
     }
 
     /**
@@ -186,7 +186,7 @@ class Kernel
      */
     public static function debug($message, array $context = array())
     {
-        self::kernel()->log(LogLevel::DEBUG, $message, $context);
+        self::getKernel()->log(LogLevel::DEBUG, $message, $context);
     }
 
     /**
@@ -199,7 +199,7 @@ class Kernel
      */
     public static function log($level, $message, array $context = array())
     {
-        self::kernel()->log($level, $message, $context);
+        self::getKernel()->log($level, $message, $context);
     }
 
     /*******************************************************************************
@@ -211,7 +211,7 @@ class Kernel
      *
      * @return \Apparat\Kernel\Domain\Model\Kernel Kernel instance
      */
-    protected static function kernel()
+    protected static function getKernel()
     {
         if (self::$kernel === null) {
             self::$kernel = new \Apparat\Kernel\Domain\Model\Kernel(new DiceAdapter(), new Logger());

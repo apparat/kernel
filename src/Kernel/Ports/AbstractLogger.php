@@ -91,7 +91,6 @@ abstract class AbstractLogger extends Logger
                     sprintf('Unsupported log handler "%s"', $handler),
                     RuntimeException::UNSUPPORTED_LOG_HANDLER
                 );
-                break;
         }
 
         parent::__construct($name, $handlers);
