@@ -36,8 +36,8 @@
 
 namespace Apparat\Kernel;
 
-use Apparat\Kernel\Ports\Contract\DependencyInjectionContainerInterface;
 use Apparat\Kernel\Ports\AbstractModule;
+use Apparat\Kernel\Ports\Contract\DependencyInjectionContainerInterface;
 use Dotenv\Dotenv;
 
 /**

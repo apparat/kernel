@@ -36,8 +36,8 @@
 
 namespace Apparat\Kernel\Ports;
 
-use Apparat\Kernel\Ports\Contract\ModuleInterface;
 use Apparat\Kernel\Ports\Contract\DependencyInjectionContainerInterface;
+use Apparat\Kernel\Ports\Contract\ModuleInterface;
 use Dotenv\Dotenv;
 
 /**
@@ -107,24 +107,25 @@ abstract class AbstractModule implements ModuleInterface
      */
     protected static function environment($directory)
     {
-        // Find a valid environment file
+        // Collect all valid environment files
+        $envDirectories = [];
         $envDirectory = $directory;
-        while (!@is_file($envDirectory.DIRECTORY_SEPARATOR.'.env')) {
-            $upEnvDirectory = dirname($envDirectory);
-            if (!strlen($upEnvDirectory) || ($upEnvDirectory == $envDirectory)) {
-                $envDirectory = null;
-                break;
+        do {
+            if (@is_file($envDirectory.DIRECTORY_SEPARATOR.'.env')) {
+                $envDirectories[] = $envDirectory;
             }
-            $envDirectory = $upEnvDirectory;
+            $upEnvDirectory = $envDirectory;
+            $envDirectory = dirname($envDirectory);
+        } while(strlen($upEnvDirectory) && ($upEnvDirectory != $envDirectory));
+
+        // Load all collected environment files
+        if (getenv('APP_ENV') === 'development') {
+            foreach (array_reverse($envDirectories) as $envDirectory) {
+                (new Dotenv($envDirectory))->overload();
+            }
         }
 
-        // Instantiate the environment abstraction
-        $dotenv = new Dotenv($envDirectory ?: $directory);
-        if ($envDirectory && (getenv('APP_ENV') === 'development')) {
-            $dotenv->load();
-        }
-
-        return $dotenv;
+        return new Dotenv($directory);
     }
 
     /**
