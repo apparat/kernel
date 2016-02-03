@@ -12,9 +12,9 @@ This library requires PHP 5.6 or later. I recommend using the latest available v
 
 ## Quality
 
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/apparat/kernel/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/apparat/kernel/?branch=master)
 [![Build Status](https://secure.travis-ci.org/apparat/kernel.svg)](https://travis-ci.org/apparat/kernel)
 [![Coverage Status](https://coveralls.io/repos/apparat/kernel/badge.svg?branch=master&service=github)](https://coveralls.io/github/apparat/kernel?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/apparat/kernel/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/apparat/kernel/?branch=master)
 [![Code Climate](https://codeclimate.com/github/apparat/kernel/badges/gpa.svg)](https://codeclimate.com/github/apparat/kernel)
 
 To run the unit tests at the command line, issue `composer install` and then `phpunit` at the package root. This requires [Composer](http://getcomposer.org/) to be available as `composer`, and [PHPUnit](http://phpunit.de/manual/) to be available as `phpunit`.
