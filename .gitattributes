@@ -1,5 +1,5 @@
 # Auto detect text files and perform LF normalization
-* text=auto
+* text eol=lf
 
 # Ignore all test and documentation with "export-ignore".
 /.codeclimate.yml export-ignore
@@ -10,5 +10,5 @@
 /CHANGELOG.md export-ignore
 /phpunit.php export-ignore
 /phpunit.xml.dist export-ignore
-/src/Kernel/Tests export-ignore
+/src/Resource/Tests export-ignore
 /README.md export-ignore

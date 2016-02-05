@@ -8,3 +8,8 @@ tools:
     php_pdepend: true
     php_analyzer: true
     php_cpd: true
+    php_cs_fixer:
+      config: { level: psr2 }
+    php_code_sniffer:
+      config:
+        standard: "PSR2"
