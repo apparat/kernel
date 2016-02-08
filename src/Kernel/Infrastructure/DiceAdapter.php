@@ -36,6 +36,7 @@
 
 namespace Apparat\Kernel\Infrastructure;
 
+use Apparat\Kernel\Common\RuntimeException;
 use Apparat\Kernel\Ports\Contract\DependencyInjectionContainerInterface;
 use Apparat\Kernel\Ports\Contract\ModuleInterface;
 use Dice\Dice;
@@ -83,5 +84,24 @@ class DiceAdapter implements DependencyInjectionContainerInterface
     public function create($name, array $args = [])
     {
         return $this->dice->create($name, $args);
+    }
+
+    /**
+     * Register a service or rule
+     *
+     * @param array $arguments Registration arguments
+     * @throws RuntimeException When there are not exactly 2 arguments
+     */
+    public function register(...$arguments)
+    {
+        // If there are less or more than 2 arguments
+        if (count($arguments) != 2) {
+            throw new RuntimeException(
+                sprintf('Invalid dependency injection argument count (%s), must be 2', count($arguments)),
+                RuntimeException::INVALID_DI_ARGUMENT_COUNT
+            );
+        }
+
+        $this->dice->addRule($arguments[0], $arguments[1]);
     }
 }

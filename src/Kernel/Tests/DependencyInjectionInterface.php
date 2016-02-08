@@ -5,10 +5,10 @@
  *
  * @category    Apparat
  * @package     Apparat\Kernel
- * @subpackage  Apparat\Kernel\Common
+ * @subpackage  Apparat\Kernel\Tests
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
- * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
  */
 
 /***********************************************************************************
@@ -34,26 +34,15 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-namespace Apparat\Kernel\Common;
+namespace Apparat\Kernel\Tests;
 
 /**
- * Kernel runtime exception
+ * Dependency injection test interface
  *
  * @package Apparat\Kernel
- * @subpackage Apparat\Kernel\Common
+ * @subpackage Apparat\Kernel\Tests
  */
-class RuntimeException extends \RuntimeException
+interface DependencyInjectionInterface
 {
-    /**
-     * Unsupported log handler
-     *
-     * @var int
-     */
-    const UNSUPPORTED_LOG_HANDLER = 1453587845;
-    /**
-     * Invalid dependency injection argument count
-     *
-     * @var int
-     */
-    const INVALID_DI_ARGUMENT_COUNT = 1454965955;
+
 }

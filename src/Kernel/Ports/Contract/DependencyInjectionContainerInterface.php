@@ -50,4 +50,11 @@ interface DependencyInjectionContainerInterface extends \Apparat\Kernel\Domain\C
      * @param ModuleInterface $module Module
      */
     public function configure(ModuleInterface $module);
+
+    /**
+     * Register a service or rule
+     *
+     * @param array $arguments Registration arguments
+     */
+    public function register(...$arguments);
 }

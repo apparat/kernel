@@ -5,10 +5,10 @@
  *
  * @category    Apparat
  * @package     Apparat\Kernel
- * @subpackage  Apparat\Kernel\Common
+ * @subpackage  Apparat\Kernel\Tests
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
- * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @license     http://opensource.org/licenses/MIT	The MIT License (MIT)
  */
 
 /***********************************************************************************
@@ -34,26 +34,49 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-namespace Apparat\Kernel\Common;
+namespace Apparat\Kernel\Tests;
+
+use Apparat\Kernel\Infrastructure\DiceAdapter;
 
 /**
- * Kernel runtime exception
+ * Dependency Injection Tests
  *
  * @package Apparat\Kernel
- * @subpackage Apparat\Kernel\Common
+ * @subpackage Apparat\Kernel\Tests
  */
-class RuntimeException extends \RuntimeException
+class DependencyInjectionTest extends AbstractTest
 {
     /**
-     * Unsupported log handler
+     * Test registering a dice rule with wrong number of arguments
      *
-     * @var int
+     * @expectedException \Apparat\Kernel\Common\RuntimeException
+     * @expectedExceptionCode 1454965955
      */
-    const UNSUPPORTED_LOG_HANDLER = 1453587845;
+    public function testDiceInvalidRegister()
+    {
+        $dice = new DiceAdapter();
+        $dice->register();
+    }
+
     /**
-     * Invalid dependency injection argument count
-     *
-     * @var int
+     * Test the dice dependency injection with a singleton
      */
-    const INVALID_DI_ARGUMENT_COUNT = 1454965955;
+    public function testDiceSingleton()
+    {
+        $dice = new DiceAdapter();
+        $rule = [
+            'shared' => true,
+            'substitutions' => [
+                DependencyInjectionInterface::class => [
+                    'instance' => DependencyInjectionB::class,
+                ],
+            ]
+        ];
+        $dice->register(DependencyInjectionA::class, $rule);
+        $a1 = $dice->create(DependencyInjectionA::class);
+        $a2 = $dice->create(DependencyInjectionA::class);
+        $this->assertInstanceOf(DependencyInjectionA::class, $a1);
+        $this->assertInstanceOf(DependencyInjectionB::class, $a1->getB());
+        $this->assertTrue($a1 === $a2);
+    }
 }
