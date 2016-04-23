@@ -143,7 +143,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        foreach ($this->tmpFiles as $tmpFile) {
+        foreach (array_reverse($this->tmpFiles) as $tmpFile) {
             @is_file($tmpFile) ? @unlink($tmpFile) : @rmdir($tmpFile);
         }
     }
