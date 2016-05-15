@@ -5,4 +5,5 @@ repo_url: https://github.com/apparat/kernel/
 docs_dir: doc
 pages:
 - Home: 'index.md'
+- Ports: 'ports.md'
 - To-Do: 'todo.md'
