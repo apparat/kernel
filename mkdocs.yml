@@ -1,0 +1,8 @@
+site_name: apparat/kernel
+site_description: Apparat kernel providing common functionality like Dependency Injection / an IoC container, PSR-3 compatible logging etc.
+site_author: Joschi Kuphal
+repo_url: https://github.com/apparat/kernel/
+docs_dir: doc
+pages:
+- Home: 'index.md'
+- To-Do: 'todo.md'
