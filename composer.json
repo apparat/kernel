@@ -17,12 +17,13 @@
   },
   "require-dev": {
     "phpunit/phpunit": "^5.3",
-    "codeclimate/php-test-reporter": "0.*"
+    "codeclimate/php-test-reporter": "0.*",
+    "apparat/dev": "dev-master"
   },
   "repositories": [
     {
       "type": "vcs",
-      "url": "git@github.com:apparat/kernel.git",
+      "url": "git@github.com:apparat/dev.git",
       "reference": "master"
     }
   ],

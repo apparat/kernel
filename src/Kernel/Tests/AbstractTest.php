@@ -4,8 +4,8 @@
  * apparat-object
  *
  * @category    Apparat
- * @package     Apparat\Object
- * @subpackage  Apparat\Object\Infrastructure
+ * @package     Apparat\Kernel
+ * @subpackage  Apparat\Kernel\Infrastructure
  * @author      Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @copyright   Copyright © 2016 Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
@@ -39,153 +39,9 @@ namespace Apparat\Kernel\Tests;
 /**
  * Basic tests for generic files
  *
- * @package     Apparat\Object
- * @subpackage  Apparat\Object\Infrastructure
+ * @package     Apparat\Kernel
+ * @subpackage  Apparat\Kernel\Infrastructure
  */
-abstract class AbstractTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractTest extends \Apparat\Dev\Tests\AbstractTest
 {
-    /**
-     * Temporary FILES
-     *
-     * @var array
-     */
-    protected $tmpFiles = array();
-
-    /**
-     * Tests if two arrays equal in their keys and values
-     *
-     * @param array $expected Expected result
-     * @param array $actual Actual result
-     * @param string $message Message
-     */
-    public function assertArrayEquals(array $expected, array $actual, $message = '')
-    {
-        $this->assertEquals(
-            $this->sortArrayForComparison($expected),
-            $this->sortArrayForComparison($actual),
-            $message
-        );
-    }
-
-    /**
-     * Recursively sort an array for comparison with another array
-     *
-     * @param array $array Array
-     * @return array                Sorted array
-     */
-    protected function sortArrayForComparison(array $array)
-    {
-        // Tests if all array keys are numeric
-        $allNumeric = true;
-        foreach (array_keys($array) as $key) {
-            if (!is_numeric($key)) {
-                $allNumeric = false;
-                break;
-            }
-        }
-
-        // If not all keys are numeric: Sort the array by key
-        if (!$allNumeric) {
-            ksort($array, SORT_STRING);
-            return $this->sortArrayRecursive($array);
-        }
-
-        // Sort them by data type and value
-        $array = $this->sortArrayRecursive($array);
-        usort(
-            $array,
-            function (
-                $first,
-                $second
-            ) {
-                $aType = gettype($first);
-                $bType = gettype($second);
-                if ($aType === $bType) {
-                    switch ($aType) {
-                        case 'array':
-                            return strcmp(implode('', array_keys($first)), implode('', array_keys($second)));
-                        case 'object':
-                            return strcmp(spl_object_hash($first), spl_object_hash($second));
-                        default:
-                            return strcmp(strval($first), strval($second));
-                    }
-                }
-
-                return strcmp($aType, $bType);
-            }
-        );
-
-        return $array;
-    }
-
-    /**
-     * Recursively sort an array for comparison
-     *
-     * @param array $array Original array
-     * @return array Sorted array
-     */
-    protected function sortArrayRecursive(array $array)
-    {
-
-        // Run through all elements and sort them recursively if they are an array
-        reset($array);
-        while (list($key, $value) = each($array)) {
-            if (is_array($value)) {
-                $array[$key] = $this->sortArrayForComparison($value);
-            }
-        }
-
-        return $array;
-    }
-
-    /**
-     * Tears down the fixture
-     */
-    protected function tearDown()
-    {
-        foreach (array_reverse($this->tmpFiles) as $tmpFile) {
-            @is_file($tmpFile) ? @unlink($tmpFile) : @rmdir($tmpFile);
-        }
-    }
-
-    /*******************************************************************************
-     * PRIVATE METHODS
-     *******************************************************************************/
-
-    /**
-     * Prepare and register a temporary file name
-     *
-     * @return string Temporary file name
-     */
-    protected function createTemporaryFileName()
-    {
-        $tempFileName = $this->createTemporaryFile();
-        unlink($tempFileName);
-        return $tempFileName;
-    }
-
-    /**
-     * Prepare and register a temporary file
-     *
-     * @return string Temporary file name
-     */
-    protected function createTemporaryFile()
-    {
-        return $this->tmpFiles[] = tempnam(sys_get_temp_dir(), 'apparat_test_');
-    }
-
-    /**
-     * Normalize HTML contents
-     *
-     * @param string $html Original HTML
-     * @return string Normalized HTML
-     */
-    protected function normalizeHtml($html)
-    {
-        $htmlDom = new \DOMDocument();
-        $htmlDom->preserveWhiteSpace = false;
-        $htmlDom->formatOutput = false;
-        $htmlDom->loadXML("<html><head><title>apparat</title></head><body>$html</body></html>");
-        return $htmlDom->saveXML();
-    }
 }

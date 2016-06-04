@@ -56,10 +56,6 @@ class Kernel
      */
     protected static $kernel = null;
 
-    /*******************************************************************************
-     * PUBLIC METHODS
-     *******************************************************************************/
-
     /**
      * Register an apparat module
      *
@@ -202,12 +198,8 @@ class Kernel
         self::getKernel()->log($level, $message, $context);
     }
 
-    /*******************************************************************************
-     * PRIVATE METHODS
-     *******************************************************************************/
-
     /**
-     * Return the kernel instance
+     * Create and return the kernel instance
      *
      * @return \Apparat\Kernel\Domain\Model\Kernel Kernel instance
      */
