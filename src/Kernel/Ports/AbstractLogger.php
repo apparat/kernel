@@ -47,7 +47,7 @@ use Monolog\Logger;
  * Abstract logger
  *
  * @package Apparat\Kernel
- * @subpackage Apparat\Kernel\Infrastructure
+ * @subpackage Apparat\Kernel\Ports
  */
 abstract class AbstractLogger extends Logger
 {

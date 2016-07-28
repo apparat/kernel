@@ -40,7 +40,7 @@ namespace Apparat\Kernel\Ports\Contract;
  * Kernel module interface
  *
  * @package Apparat\Kernel
- * @subpackage Apparat\Kernel\Domain
+ * @subpackage Apparat\Kernel\Ports
  */
 interface ModuleInterface extends \Apparat\Kernel\Domain\Contract\ModuleInterface
 {
