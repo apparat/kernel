@@ -49,16 +49,16 @@ class DependencyInjectionA
      *
      * @var DependencyInjectionInterface
      */
-    private $b;
+    private $bdi;
 
     /**
      * Dependency injection test class A constructor
      *
-     * @param DependencyInjectionInterface $b Dependency instance
+     * @param DependencyInjectionInterface $bdi Dependency instance
      */
-    public function __construct(DependencyInjectionInterface $b)
+    public function __construct(DependencyInjectionInterface $bdi)
     {
-        $this->b = $b;
+        $this->bdi = $bdi;
     }
 
     /**
@@ -68,6 +68,6 @@ class DependencyInjectionA
      */
     public function getB()
     {
-        return $this->b;
+        return $this->bdi;
     }
 }

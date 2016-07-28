@@ -73,10 +73,10 @@ class DependencyInjectionTest extends AbstractTest
             ]
         ];
         $dice->register(DependencyInjectionA::class, $rule);
-        $a1 = $dice->create(DependencyInjectionA::class);
-        $a2 = $dice->create(DependencyInjectionA::class);
-        $this->assertInstanceOf(DependencyInjectionA::class, $a1);
-        $this->assertInstanceOf(DependencyInjectionB::class, $a1->getB());
-        $this->assertTrue($a1 === $a2);
+        $adi1 = $dice->create(DependencyInjectionA::class);
+        $adi2 = $dice->create(DependencyInjectionA::class);
+        $this->assertInstanceOf(DependencyInjectionA::class, $adi1);
+        $this->assertInstanceOf(DependencyInjectionB::class, $adi1->getB());
+        $this->assertTrue($adi1 === $adi2);
     }
 }

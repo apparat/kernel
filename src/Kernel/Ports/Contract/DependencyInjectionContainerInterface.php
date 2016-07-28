@@ -42,7 +42,8 @@ namespace Apparat\Kernel\Ports\Contract;
  * @package Apparat\Kernel
  * @subpackage Apparat\Kernel\Ports
  */
-interface DependencyInjectionContainerInterface extends \Apparat\Kernel\Domain\Contract\DependencyInjectionContainerInterface
+interface DependencyInjectionContainerInterface extends
+    \Apparat\Kernel\Domain\Contract\DependencyInjectionContainerInterface
 {
     /**
      * Apply a module specific dependency injection configuration

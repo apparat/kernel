@@ -55,31 +55,6 @@ abstract class AbstractModule implements ModuleInterface
      */
     const NAME = 'abstract';
 
-    /*******************************************************************************
-     * PUBLIC METHODS
-     *******************************************************************************/
-
-    /**
-     * Configure the dependency injection container
-     *
-     * @param DependencyInjectionContainerInterface $diContainer Dependency injection container
-     * @return void
-     */
-    public function configureDependencyInjection(DependencyInjectionContainerInterface $diContainer)
-    {
-        // Overwrite in module implementations
-    }
-
-    /**
-     * Return the module name
-     *
-     * @return string Module name
-     */
-    public function getName()
-    {
-        return static::NAME;
-    }
-
     /**
      * Auto-run
      *
@@ -95,9 +70,17 @@ abstract class AbstractModule implements ModuleInterface
         Kernel::register(new static);
     }
 
-    /*******************************************************************************
-     * PRIVATE METHODS
-     *******************************************************************************/
+    /**
+     * Validate the environment
+     *
+     * @param Dotenv $environment Environment
+     * @return Dotenv Environment
+     */
+    protected static function validateEnvironment(Dotenv $environment)
+    {
+        // Overwrite in module implementations
+        return $environment;
+    }
 
     /**
      * Instantiate the environment
@@ -129,12 +112,24 @@ abstract class AbstractModule implements ModuleInterface
     }
 
     /**
-     * Validate the environment
+     * Configure the dependency injection container
      *
-     * @param Dotenv $environment Environment
+     * @param DependencyInjectionContainerInterface $diContainer Dependency injection container
+     * @return DependencyInjectionContainerInterface Dependency injection container
      */
-    protected static function validateEnvironment(Dotenv $environment)
+    public function configureDependencyInjection(DependencyInjectionContainerInterface $diContainer)
     {
         // Overwrite in module implementations
+        return $diContainer;
+    }
+
+    /**
+     * Return the module name
+     *
+     * @return string Module name
+     */
+    public function getName()
+    {
+        return static::NAME;
     }
 }
