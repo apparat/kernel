@@ -37,7 +37,6 @@
 namespace Apparat\Kernel;
 
 use Apparat\Kernel\Ports\AbstractModule;
-use Apparat\Kernel\Ports\Contract\DependencyInjectionContainerInterface;
 use Dotenv\Dotenv;
 
 /**
@@ -55,30 +54,11 @@ class Module extends AbstractModule
      */
     const NAME = 'kernel';
 
-    /*******************************************************************************
-     * PUBLIC METHODS
-     *******************************************************************************/
-
-    /**
-     * Configure the dependency injection container
-     *
-     * @param DependencyInjectionContainerInterface $diContainer Dependency injection container
-     * @return void
-     * @see https://r.je/dice.html#example3-6
-     */
-    public function configureDependencyInjection(DependencyInjectionContainerInterface $diContainer)
-    {
-        parent::configureDependencyInjection($diContainer);
-    }
-
-    /*******************************************************************************
-     * PRIVATE METHODS
-     *******************************************************************************/
-
     /**
      * Validate the environment
      *
      * @param Dotenv $environment Environment
+     * @return Dotenv Environment
      */
     protected static function validateEnvironment(Dotenv $environment)
     {
