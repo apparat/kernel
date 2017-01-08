@@ -1,5 +1,11 @@
 # apparat/kernel
 
+[![Build Status](https://secure.travis-ci.org/apparat/kernel.svg)](https://travis-ci.org/apparat/kernel)
+[![Coverage Status](https://coveralls.io/repos/apparat/kernel/badge.svg?branch=master&service=github)](https://coveralls.io/github/apparat/kernel?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/apparat/kernel/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/apparat/kernel/?branch=master)
+[![Code Climate](https://codeclimate.com/github/apparat/kernel/badges/gpa.svg)](https://codeclimate.com/github/apparat/kernel)
+[![Documentation Status](https://readthedocs.org/projects/apparat-kernel/badge/?version=latest)](http://apparat-kernel.readthedocs.io/en/latest/?badge=latest)
+
 Provides common base functionality for all other apparat modules:
 
 * Manifest module definition
@@ -16,13 +22,11 @@ Please find the [project documentation](doc/index.md) in the `doc` directory. I 
 
 This library requires PHP 5.6 or later. I recommend using the latest available version of PHP as a matter of principle. It has no userland dependencies.
 
-## Quality
+## Dependencies
 
-[![Build Status](https://secure.travis-ci.org/apparat/kernel.svg)](https://travis-ci.org/apparat/kernel)
-[![Coverage Status](https://coveralls.io/repos/apparat/kernel/badge.svg?branch=master&service=github)](https://coveralls.io/github/apparat/kernel?branch=master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/apparat/kernel/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/apparat/kernel/?branch=master)
-[![Code Climate](https://codeclimate.com/github/apparat/kernel/badges/gpa.svg)](https://codeclimate.com/github/apparat/kernel)
-[![Documentation Status](https://readthedocs.org/projects/apparat-kernel/badge/?version=latest)](http://apparat-kernel.readthedocs.io/en/latest/?badge=latest)
+![Composer dependency graph](https://rawgit.com/apparat/kernel/master/doc/dependencies.svg)
+
+## Quality
 
 To run the unit tests at the command line, issue `composer install` and then `phpunit` at the package root. This requires [Composer](http://getcomposer.org/) to be available as `composer`, and [PHPUnit](http://phpunit.de/manual/) to be available as `phpunit`.
 
